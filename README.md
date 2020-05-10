@@ -33,6 +33,4 @@ Constraints:
 
 # Solution:
 
-First set up the occurance list and the number list, which store the times that each number has shown up. 
-Then, each time it iterates the given array, it modifies the two lists in the logic stated above.
-At last, it finds if each occurance element has existed in the rest of the occurrance list and each time the occurance list removes its first element. If one is found, then return false. If one has never been found, then return true.
+
