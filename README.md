@@ -1,34 +1,34 @@
-# 1207. Unique Number of Occurrences
-
+# 705. Design HashSet
 Easy
-
 
 Add to List
 
 Share
-Given an array of integers arr, write a function that returns true if and only if the number of occurrences of each value in the array is unique.
+Design a HashSet without using any built-in hash table libraries.
 
- 
+To be specific, your design should include these functions:
 
-Example 1:
+add(value): Insert a value into the HashSet. 
+contains(value) : Return whether the value exists in the HashSet or not.
+remove(value): Remove a value in the HashSet. If the value does not exist in the HashSet, do nothing.
 
-Input: arr = [1,2,2,1,1,3]
-Output: true
-Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
-Example 2:
+Example:
 
-Input: arr = [1,2]
-Output: false
-Example 3:
+MyHashSet hashSet = new MyHashSet();
+hashSet.add(1);         
+hashSet.add(2);         
+hashSet.contains(1);    // returns true
+hashSet.contains(3);    // returns false (not found)
+hashSet.add(2);          
+hashSet.contains(2);    // returns true
+hashSet.remove(2);          
+hashSet.contains(2);    // returns false (already removed)
 
-Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
-Output: true
- 
+Note:
 
-Constraints:
-
-1 <= arr.length <= 1000
--1000 <= arr[i] <= 1000
+All values will be in the range of [0, 1000000].
+The number of operations will be in the range of [1, 10000].
+Please do not use the built-in HashSet library.
 
 
 # Solution:
