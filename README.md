@@ -1,36 +1,27 @@
-# 705. Design HashSet
+# 705. Add Binary
 Easy
 
-Add to List
+Given two binary strings, return their sum (also a binary string).
 
-Share
-Design a HashSet without using any built-in hash table libraries.
+The input strings are both non-empty and contains only characters 1 or 0.
 
-To be specific, your design should include these functions:
+Example 1:
 
-add(value): Insert a value into the HashSet. 
-contains(value) : Return whether the value exists in the HashSet or not.
-remove(value): Remove a value in the HashSet. If the value does not exist in the HashSet, do nothing.
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
 
-Example:
+Input: a = "1010", b = "1011"
+Output: "10101"
+ 
 
-MyHashSet hashSet = new MyHashSet();
-hashSet.add(1);         
-hashSet.add(2);         
-hashSet.contains(1);    // returns true
-hashSet.contains(3);    // returns false (not found)
-hashSet.add(2);          
-hashSet.contains(2);    // returns true
-hashSet.remove(2);          
-hashSet.contains(2);    // returns false (already removed)
+Constraints:
 
-Note:
-
-All values will be in the range of [0, 1000000].
-The number of operations will be in the range of [1, 10000].
-Please do not use the built-in HashSet library.
+Each string consists only of '0' or '1' characters.
+1 <= a.length, b.length <= 10^4
+Each string is either "0" or doesn't contain any leading zero.
 
 
 # Solution:
 
-
+See code.
