@@ -9,6 +9,7 @@ Example 1:
 
 Input: "A man, a plan, a canal: Panama"
 Output: true
+
 Example 2:
 
 Input: "race a car"
