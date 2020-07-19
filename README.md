@@ -1,23 +1,31 @@
-# 28. Implement strStr()
+# 70. Climbing Stairs
 
-Implement strStr().
+You are climbing a stair case. It takes n steps to reach to the top.
 
-Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
 Example 1:
 
-Input: haystack = "hello", needle = "ll"
+Input: 2
 Output: 2
-Example 2:
+Explanation: There are two ways to climb to the top.
 
-Input: haystack = "aaaaa", needle = "bba"
-Output: -1
-Clarification:
+1. 1 step + 1 step
+2. 2 steps
+   Example 2:
 
-What should we return when needle is an empty string? This is a great question to ask during an interview.
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
 
-For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+Constraints:
+
+1 <= n <= 45
 
 # Solution:
 
-Sliding window. Each step it checks whether in the the haystack there is a substring of the same length of the needle that is identical to the needle.
+I first approached this by doing BFS and it turned out to be a Brute Force method. After, I realized that this problem is very similar to solving Fibonacci sequence, and solved it with a for loop in O(n) time complexity.
