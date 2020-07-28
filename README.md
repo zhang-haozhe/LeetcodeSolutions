@@ -1,31 +1,30 @@
-# 70. Climbing Stairs
+# 9. Palindrome Number
 
-You are climbing a stair case. It takes n steps to reach to the top.
-
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
 
 Example 1:
 
-Input: 2
-Output: 2
-Explanation: There are two ways to climb to the top.
+Input: 121
+Output: true
+Example 2:
 
-1. 1 step + 1 step
-2. 2 steps
-   Example 2:
+Input: -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
 
-Input: 3
-Output: 3
-Explanation: There are three ways to climb to the top.
+Input: 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+Follow up:
 
-1. 1 step + 1 step + 1 step
-2. 1 step + 2 steps
-3. 2 steps + 1 step
+Coud you solve it without converting the integer to a string?
 
-Constraints:
+# Result:
 
-1 <= n <= 45
+Runtime: 80 ms, faster than 40.78% of Python3 online submissions for Palindrome Number.
+Memory Usage: 13.8 MB, less than 56.77% of Python3 online submissions for Palindrome Number.
 
 # Solution:
 
-I first approached this by doing BFS and it turned out to be a Brute Force method. After, I realized that this problem is very similar to solving Fibonacci sequence, and solved it with a for loop in O(n) time complexity.
+This solution does not convert the number from integer to string, as requested. Instead, it directly compares the first and the last digits, the second and the second last digits, so on so forth, to get the final result. The number of comparisons is set to length // 2. The method to get the desired digit is to first divide the number by the nth power of 10, where n is the digit number that is desired. During the comparisons, if any two of the digits do not match, the function returns false.
