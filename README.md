@@ -1,30 +1,27 @@
-# 9. Palindrome Number
+# 7. Reverse Integer
 
-Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+Given a 32-bit signed integer, reverse digits of an integer.
 
 Example 1:
 
-Input: 121
-Output: true
+Input: 123
+Output: 321
 Example 2:
 
-Input: -121
-Output: false
-Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Input: -123
+Output: -321
 Example 3:
 
-Input: 10
-Output: false
-Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
-Follow up:
-
-Coud you solve it without converting the integer to a string?
+Input: 120
+Output: 21
+Note:
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231, 231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
 
 # Result:
 
-Runtime: 80 ms, faster than 40.78% of Python3 online submissions for Palindrome Number.
-Memory Usage: 13.8 MB, less than 56.77% of Python3 online submissions for Palindrome Number.
+Runtime: 24 ms, faster than 97.65% of Python3 online submissions for Reverse Integer.
+Memory Usage: 14 MB, less than 18.54% of Python3 online submissions for Reverse Integer.
 
 # Solution:
 
-This solution does not convert the number from integer to string, as requested. Instead, it directly compares the first and the last digits, the second and the second last digits, so on so forth, to get the final result. The number of comparisons is set to length // 2. The method to get the desired digit is to first divide the number by the nth power of 10, where n is the digit number that is desired. During the comparisons, if any two of the digits do not match, the function returns false.
+My solution is that each time the program adds one digit times 10 to the power of x to the result variable, where x represents the "reversed place of the digit". For example, given number 123, it adds 1 _ 10 ^ 0, 2 _ 10 ^ 1, and 3 \* 10 ^ 2, respectively. If the number is negative, turn it into a positive number and mark the input as a negative number. When the calculation is completed, the program returns the negative number of the result.
