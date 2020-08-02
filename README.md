@@ -1,27 +1,46 @@
-# 217. Contains Duplicate
+# 451. Sort Characters By Frequency
 
-Given an array of integers, find if the array contains any duplicates.
-
-Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+Given a string, sort it in decreasing order based on the frequency of characters.
 
 Example 1:
 
-Input: [1,2,3,1]
-Output: true
+Input:
+"tree"
+
+Output:
+"eert"
+
+Explanation:
+'e' appears twice while 'r' and 't' both appear once.
+So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
 Example 2:
 
-Input: [1,2,3,4]
-Output: false
+Input:
+"cccaaa"
+
+Output:
+"cccaaa"
+
+Explanation:
+Both 'c' and 'a' appear three times, so "aaaccc" is also a valid answer.
+Note that "cacaca" is incorrect, as the same characters must be together.
 Example 3:
 
-Input: [1,1,1,3,3,4,3,2,4,2]
-Output: true
+Input:
+"Aabb"
+
+Output:
+"bbAa"
+
+Explanation:
+"bbaA" is also a valid answer, but "Aabb" is incorrect.
+Note that 'A' and 'a' are treated as two different characters.
 
 # Result:
 
-Runtime: 124 ms, faster than 88.12% of Python3 online submissions for Contains Duplicate.
-Memory Usage: 20.2 MB, less than 15.85% of Python3 online submissions for Contains Duplicate.
+Runtime: 40 ms, faster than 83.74% of Python3 online submissions for Sort Characters By Frequency.
+Memory Usage: 15.1 MB, less than 58.78% of Python3 online submissions for Sort Characters By Frequency.
 
 # Solution:
 
-The core of this solution is Hash, in that looking for pairs of mapped values is fairly easy and fast using dictionary in Python. Therefore, the program each time checks if a value exists in its dictionary; if so, it returns true and adds the value if not.
+The dictionary stores the frequency of each character's presence. However, it needs to be sorted by its values. Hence, we use Python's built-in sorted function, where its three parameters being the items of the dict, specifying the function to sort by value and true for making the sorting to go in the descending order.
