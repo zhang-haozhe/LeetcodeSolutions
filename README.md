@@ -24,4 +24,5 @@ Memory Usage: 14 MB, less than 18.54% of Python3 online submissions for Reverse 
 
 # Solution:
 
-My solution is that each time the program adds one digit times 10 to the power of x to the result variable, where x represents the "reversed place of the digit". For example, given number 123, it adds 1 _ 10 ^ 0, 2 _ 10 ^ 1, and 3 \* 10 ^ 2, respectively. If the number is negative, turn it into a positive number and mark the input as a negative number. When the calculation is completed, the program returns the negative number of the result.
+My solution is that each time the program adds one digit time
+10 to the power of x to the result variable, where x represents the "reversed place of the digit". For example, given number 123, it adds 1 _ 10 ^ 0, 2 _ 10 ^ 1, and 3 \* 10 ^ 2, respectively. If the number is negative, turn it into a positive number and mark the input as a negative number. When the calculation is completed, the program returns the negative number of the result.
