@@ -1,46 +1,21 @@
-# 451. Sort Characters By Frequency
+# 83. Remove Duplicates from Sorted List
 
-Given a string, sort it in decreasing order based on the frequency of characters.
+Given a sorted linked list, delete all duplicates such that each element appear only once.
 
 Example 1:
 
-Input:
-"tree"
-
-Output:
-"eert"
-
-Explanation:
-'e' appears twice while 'r' and 't' both appear once.
-So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
+Input: 1->1->2
+Output: 1->2
 Example 2:
 
-Input:
-"cccaaa"
-
-Output:
-"cccaaa"
-
-Explanation:
-Both 'c' and 'a' appear three times, so "aaaccc" is also a valid answer.
-Note that "cacaca" is incorrect, as the same characters must be together.
-Example 3:
-
-Input:
-"Aabb"
-
-Output:
-"bbAa"
-
-Explanation:
-"bbaA" is also a valid answer, but "Aabb" is incorrect.
-Note that 'A' and 'a' are treated as two different characters.
+Input: 1->1->2->3->3
+Output: 1->2->3
 
 # Result:
 
-Runtime: 40 ms, faster than 83.74% of Python3 online submissions for Sort Characters By Frequency.
-Memory Usage: 15.1 MB, less than 58.78% of Python3 online submissions for Sort Characters By Frequency.
+Runtime: 40 ms, faster than 87.83% of Python3 online submissions for Remove Duplicates from Sorted List.
+Memory Usage: 13.8 MB, less than 67.96% of Python3 online submissions for Remove Duplicates from Sorted List.
 
 # Solution:
 
-The dictionary stores the frequency of each character's presence. However, it needs to be sorted by its values. Hence, we use Python's built-in sorted function, where its three parameters being the items of the dict, specifying the function to sort by value and true for making the sorting to go in the descending order.
+We use two pointers to iterate through the linked list. Once the temporary node is not None, the program compares its value with that of its previous node. In case of duplication, the previous node points to the next node of the temporary node. Otherwise, the temporary node goes to the next node and previous node moves to one place before it.
