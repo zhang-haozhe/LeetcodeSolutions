@@ -1,25 +1,21 @@
-# 82. Remove Duplicates from Sorted List II
+# 83. Remove Duplicates from Sorted List
 
-Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
-
-Return the linked list sorted as well.
+Given a sorted linked list, delete all duplicates such that each element appear only once.
 
 Example 1:
 
-Input: 1->2->3->3->4->4->5
-Output: 1->2->5
+Input: 1->1->2
+Output: 1->2
 Example 2:
 
-Input: 1->1->1->2->3
-Output: 2->3
+Input: 1->1->2->3->3
+Output: 1->2->3
 
 # Result:
 
-Runtime: 40 ms, faster than 84.51% of Python3 online submissions for Remove Duplicates from Sorted List II.
-Memory Usage: 13.8 MB, less than 74.82% of Python3 online submissions for Remove Duplicates from Sorted List II.
+Runtime: 40 ms, faster than 87.83% of Python3 online submissions for Remove Duplicates from Sorted List.
+Memory Usage: 13.8 MB, less than 67.96% of Python3 online submissions for Remove Duplicates from Sorted List.
 
 # Solution:
 
-Each time when it encounters a situation that one node and its next node are identical in value, it iterates until it reaches the node when they are no longer equal in value. Then, in case of duplication, the previous node points to the first node in the sequence that has a different value.
-
-There are two edge cases to consider: duplication happening at the beginning and at the end of the list. To get around the first situation, we check if the head's value is equal to the value that should be jumped over. If so, then reset the head to the first node that is not duplicated. In the second situation, as the curr node goes to the end of the list, if it is a duplicated number, then the duplicated part will be jumped over by setting the node before the duplication to point to None.
+We use two pointers to iterate through the linked list. Once the temporary node is not None, the program compares its value with that of its previous node. In case of duplication, the previous node points to the next node of the temporary node. Otherwise, the temporary node goes to the next node and previous node moves to one place before it.
