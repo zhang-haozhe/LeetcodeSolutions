@@ -1,26 +1,34 @@
-# 242. Valid Anagram
+# 1480. Running Sum of 1d Array
 
-Given two strings s and t , write a function to determine if t is an anagram of s.
+Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+
+Return the running sum of nums.
 
 Example 1:
 
-Input: s = "anagram", t = "nagaram"
-Output: true
+Input: nums = [1,2,3,4]
+Output: [1,3,6,10]
+Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
 Example 2:
 
-Input: s = "rat", t = "car"
-Output: false
-Note:
-You may assume the string contains only lowercase alphabets.
+Input: nums = [1,1,1,1,1]
+Output: [1,2,3,4,5]
+Explanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].
+Example 3:
 
-Follow up:
-What if the inputs contain unicode characters? How would you adapt your solution to such case?
+Input: nums = [3,1,2,10,1]
+Output: [3,4,6,16,17]
+
+Constraints:
+
+1 <= nums.length <= 1000
+-10^6 <= nums[i] <= 10^6
 
 # Result:
 
-Runtime: 44 ms, faster than 84.89% of Python3 online submissions for Valid Anagram.
-Memory Usage: 14.3 MB, less than 34.13% of Python3 online submissions for Valid Anagram.
+Runtime: 40 ms, faster than 76.93% of Python3 online submissions for Running Sum of 1d Array.
+Memory Usage: 14 MB, less than 65.20% of Python3 online submissions for Running Sum of 1d Array.
 
 # Solution:
 
-The key is to examine if the numbers of appearances of each character are the same. Hence, a dictionary is the perfect data structure for this solution.
+See code.
