@@ -1,33 +1,38 @@
-# 230. Kth Smallest Element in a BST
+# 94. Binary Tree Inorder Traversal
 
-Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
 
 Example 1:
 
-Input: root = [3,1,4,null,2], k = 1
-3
-/ \
- 1 4
-\
- 2
-Output: 1
+Input: root = [1,null,2,3]
+Output: [1,3,2]
 Example 2:
 
-Input: root = [5,3,6,2,4,null,null,1], k = 3
-5
-/ \
- 3 6
-/ \
- 2 4
-/
-1
-Output: 3
+Input: root = []
+Output: []
+Example 3:
+
+Input: root = [1]
+Output: [1]
+Example 4:
+
+Input: root = [1,2]
+Output: [2,1]
+Example 5:
+
+Input: root = [1,null,2]
+Output: [1,2]
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
 
 # Result:
 
-Runtime: 48 ms, faster than 75.79% of Python3 online submissions for Kth Smallest Element in a BST.
-Memory Usage: 18 MB, less than 28.74% of Python3 online submissions for Kth Smallest Element in a BST.
+Runtime: 24 ms, faster than 93.80% of Python3 online submissions for Binary Tree Inorder Traversal.
+Memory Usage: 14.4 MB, less than 8.29% of Python3 online submissions for Binary Tree Inorder Traversal.
 
 # Solution:
 
-According to the property of BST, it is best to traverse the tree inorder. By finding the nth element in the inorder BST, it gives the nth minimum node in the tree.
+Inorder traversal.
