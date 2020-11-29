@@ -1,26 +1,28 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None, last=None):
-        self.val = val
-        self.next = next
-        self.last = last
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def isPalindrome(self, head: ListNode) -> bool:
-        curr = head
-        prev = ListNode()
-        check = head
-        count = 0
+    count = 0
+    k = 0
+    ans = 0
+    def printInorder(self, root):
         
-        while curr:
-            if prev != None:
-                curr.last = prev
-            prev = curr
-            curr = curr.next
-            count += 1
-        for _ in range(count):
-            # print(prev.val, check.val)
-            if prev.val != check.val:
-                return False
-            prev = prev.last
-            check = check.next
-        return True
+        if root: 
+            # First recur on left child 
+            self.printInorder(root.left) 
+
+            # then print the data of node 
+            self.count += 1
+            if self.count == self.k:
+                self.ans = root.val
+                return
+
+            # now recur on right child 
+            self.printInorder(root.right) 
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        self.k = k
+        self.printInorder(root)
+        return self.ans

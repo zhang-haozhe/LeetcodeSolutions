@@ -1,23 +1,33 @@
-# 234. Palindrome Linked List
+# 230. Kth Smallest Element in a BST
 
-Given a singly linked list, determine if it is a palindrome.
+Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
 
 Example 1:
 
-Input: 1->2
-Output: false
+Input: root = [3,1,4,null,2], k = 1
+3
+/ \
+ 1 4
+\
+ 2
+Output: 1
 Example 2:
 
-Input: 1->2->2->1
-Output: true
-Follow up:
-Could you do it in O(n) time and O(1) space?
+Input: root = [5,3,6,2,4,null,null,1], k = 3
+5
+/ \
+ 3 6
+/ \
+ 2 4
+/
+1
+Output: 3
 
 # Result:
 
-Runtime: 84 ms, faster than 47.62% of Python3 online submissions for Palindrome Linked List.
-Memory Usage: 23.7 MB, less than 99.65% of Python3 online submissions for Palindrome Linked List.
+Runtime: 48 ms, faster than 75.79% of Python3 online submissions for Kth Smallest Element in a BST.
+Memory Usage: 18 MB, less than 28.74% of Python3 online submissions for Kth Smallest Element in a BST.
 
 # Solution:
 
-First note that the definition of ListNode has been modified so that there is now a property of "the last node". The code runs through the linked list, links the nodes to the previous nodes and increments the counter by 1. Once done, it iterates the list for _counter_ times and compares if the two nodes, one starting from the end, going backward, and the other starting from the beginning, going forwards, have the same value. If not, return false.
+According to the property of BST, it is best to traverse the tree inorder. By finding the nth element in the inorder BST, it gives the nth minimum node in the tree.
