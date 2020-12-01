@@ -5,12 +5,13 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def traverse(self, root, stack):
-        if root:
-            self.traverse(root.left, stack)
-            self.traverse(root.right, stack)
-            stack.append(root.val)
-    def postorderTraversal(self, root: TreeNode) -> List[int]:
-        stack = []
-        self.traverse(root, stack)
-        return stack
+    def recur(self, root):
+        if root.left != None and root.right == None: 
+            return 1 + self.recur(root.left)
+        elif root.right != None and root.left == None: 
+            return 1 + self.recur(root.right)
+        elif root.left == None and root.right == None:
+            return 1
+        return min(1+self.recur(root.left), 1+self.recur(root.right))
+    def minDepth(self, root: TreeNode) -> int:
+        return (0 if root == None else self.recur(root))
