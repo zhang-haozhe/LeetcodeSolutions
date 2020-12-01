@@ -12,6 +12,6 @@ class Solution:
             return 1 + self.recur(root.right)
         elif root.left == None and root.right == None:
             return 1
-        return min(1+self.recur(root.left), 1+self.recur(root.right))
-    def minDepth(self, root: TreeNode) -> int:
+        return max(1+self.recur(root.left), 1+self.recur(root.right))
+    def maxDepth(self, root: TreeNode) -> int:
         return (0 if root == None else self.recur(root))
