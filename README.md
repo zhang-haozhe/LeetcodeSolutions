@@ -1,36 +1,41 @@
-# 104. Maximum Depth of Binary Tree
+# 1184. Distance Between Bus Stops
 
-Given the root of a binary tree, return its maximum depth.
+A bus has n stops numbered from 0 to n - 1 that form a circle. We know the distance between all pairs of neighboring stops where distance[i] is the distance between the stops number i and (i + 1) % n.
 
-A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+The bus goes along both directions i.e. clockwise and counterclockwise.
+
+Return the shortest distance between the given start and destination stops.
 
 Example 1:
 
-Input: root = [3,9,20,null,null,15,7]
-Output: 3
+Input: distance = [1,2,3,4], start = 0, destination = 1
+Output: 1
+Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
+
 Example 2:
 
-Input: root = [1,null,2]
-Output: 2
+Input: distance = [1,2,3,4], start = 0, destination = 2
+Output: 3
+Explanation: Distance between 0 and 2 is 3 or 7, minimum is 3.
+
 Example 3:
 
-Input: root = []
-Output: 0
-Example 4:
-
-Input: root = [0]
-Output: 1
+Input: distance = [1,2,3,4], start = 0, destination = 3
+Output: 4
+Explanation: Distance between 0 and 3 is 6 or 4, minimum is 4.
 
 Constraints:
 
-The number of nodes in the tree is in the range [0, 104].
--100 <= Node.val <= 100
+1 <= n <= 10^4
+distance.length == n
+0 <= start, destination < n
+0 <= distance[i] <= 10^4
 
 # Result:
 
-Runtime: 36 ms, faster than 89.53% of Python3 online submissions for Minimum Depth of Binary Tree.
-Memory Usage: 16.1 MB, less than 23.79% of Python3 online submissions for Minimum Depth of Binary Tree.
+Runtime: 36 ms, faster than 97.59% of Python3 online submissions for Distance Between Bus Stops.
+Memory Usage: 14.8 MB, less than 54.98% of Python3 online submissions for Distance Between Bus Stops.
 
 # Solution:
 
-This program first determines if the input is empty. If not, then it enters the recursion function. The recursion function iterates through the tree, and when it visits the next level, the level counter increments by one. If there are two children associated to this node, it takes the counter of the child that has a bigger level count.
+The gist of this solution is to calculate the "straight-line" distance between two points without considering the end of the list. Thus, the start and the destination do not matter. To calculate the distance without going through the end of the list, we create pointA and pointB, corresponding to the two points with smaller or bigger index. Then, we get the distance by summing all the nodes between the two points by calling sum(distance[pointA:pointB]) and the result becomes the first distance for comparison. The second distance is calculated by summing up all the remaining nodes, so we sum the rest by deleting the used nodes for the first calculation.
