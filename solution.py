@@ -1,13 +1,22 @@
-class Solution:
-    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
-        if start == destination: return 0 
-        pointA = min(start, destination)
-        pointB = max(start, destination)
-        
-        tempList = distance
-        
-        dis1 = sum(tempList[pointA:pointB])
-        del tempList[pointA:pointB]
-        dis2 = sum(tempList)
-        
-        return min(dis1, dis2)
+# Parameters:
+#  arr: List[int]
+#  k: int
+# return type: bool
+
+def findPair(arr, k):
+    # your code here
+    sortedArr = sorted(arr)
+    left = 0
+    right = len(sortedArr) - 1
+    for i in range(len(sortedArr)):
+        if sortedArr[left] + sortedArr[right] == k:
+            return True
+        elif sortedArr[left] + sortedArr[right] < k:
+            left += 1
+            if left == right:
+                left += 1
+        elif sortedArr[left] + sortedArr[right] > k:
+            right -= 1
+            if left == right:
+                right -= 1
+    return False

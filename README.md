@@ -1,41 +1,32 @@
-# 1184. Distance Between Bus Stops
+# 1. Find pair that sums up to k
 
-A bus has n stops numbered from 0 to n - 1 that form a circle. We know the distance between all pairs of neighboring stops where distance[i] is the distance between the stops number i and (i + 1) % n.
-
-The bus goes along both directions i.e. clockwise and counterclockwise.
-
-Return the shortest distance between the given start and destination stops.
+Solve the problem [Python]
+Given an array of integers arr and an integer k, create a boolean function that checks if there exist two elements in arr such that we get k when we add them together.
 
 Example 1:
 
-Input: distance = [1,2,3,4], start = 0, destination = 1
-Output: 1
-Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
+Input: arr = [4, 5, 1, -3, 6], k = 11
+
+Output: true
+
+Explanation: 5 + 6 is equal to 11
 
 Example 2:
 
-Input: distance = [1,2,3,4], start = 0, destination = 2
-Output: 3
-Explanation: Distance between 0 and 2 is 3 or 7, minimum is 3.
+Input: arr = [4, 5, 1, -3, 6], k = -2
+
+Output: true
+
+Explanation: 1 + (-3) is equal to -2
 
 Example 3:
 
-Input: distance = [1,2,3,4], start = 0, destination = 3
-Output: 4
-Explanation: Distance between 0 and 3 is 6 or 4, minimum is 4.
+Input: arr = [4, 5, 1, -3, 6], k = 8
 
-Constraints:
+Output: false
 
-1 <= n <= 10^4
-distance.length == n
-0 <= start, destination < n
-0 <= distance[i] <= 10^4
-
-# Result:
-
-Runtime: 36 ms, faster than 97.59% of Python3 online submissions for Distance Between Bus Stops.
-Memory Usage: 14.8 MB, less than 54.98% of Python3 online submissions for Distance Between Bus Stops.
+Explanation: there is no pair that sums up to 8
 
 # Solution:
 
-The gist of this solution is to calculate the "straight-line" distance between two points without considering the end of the list. Thus, the start and the destination do not matter. To calculate the distance without going through the end of the list, we create pointA and pointB, corresponding to the two points with smaller or bigger index. Then, we get the distance by summing all the nodes between the two points by calling sum(distance[pointA:pointB]) and the result becomes the first distance for comparison. The second distance is calculated by summing up all the remaining nodes, so we sum the rest by deleting the used nodes for the first calculation.
+A typical way to solve this problem is to enumerate all possible combinations, which is a very bad practice. My solution improves the performance by adjusting the sum and making it closer to the desired value in each step. At the beginning, there are two iterators at the ends of the sorted array. Each time the sum of the values where the iterators are located is evaluated. If the sum is bigger than the desired value, the left pointer moves right by 1 to increase the sum. Similarly, the right pointer moves left to decrease the sum if it is too large. Thus, the time complexity is reduced to O(nlogn) for sorting the array and the space complexity is O(n) for storing the sorted array.
