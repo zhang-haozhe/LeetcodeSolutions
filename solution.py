@@ -1,22 +1,11 @@
-# Parameters:
-#  arr: List[int]
-#  k: int
-# return type: bool
+from math import inf
 
-def findPair(arr, k):
-    # your code here
-    sortedArr = sorted(arr)
-    left = 0
-    right = len(sortedArr) - 1
-    for i in range(len(sortedArr)):
-        if sortedArr[left] + sortedArr[right] == k:
-            return True
-        elif sortedArr[left] + sortedArr[right] < k:
-            left += 1
-            if left == right:
-                left += 1
-        elif sortedArr[left] + sortedArr[right] > k:
-            right -= 1
-            if left == right:
-                right -= 1
-    return False
+def maxSubarray(arr):
+    globalSum = -inf
+    localSum = 0
+    for elem in arr:
+        localSum = max(elem, localSum + elem)
+        globalSum = max(globalSum, localSum)
+    print(globalSum)
+
+maxSubarray([2,3,-6,4,2,-8,3])
