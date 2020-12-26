@@ -1,13 +1,18 @@
 class Solution:
-    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
-        if start == destination: return 0 
-        pointA = min(start, destination)
-        pointB = max(start, destination)
-        
-        tempList = distance
-        
-        dis1 = sum(tempList[pointA:pointB])
-        del tempList[pointA:pointB]
-        dis2 = sum(tempList)
-        
-        return min(dis1, dis2)
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s) <= 1:
+            return len(s)
+        left = 0
+        right = 0
+        maximum = 1
+        substr = ""
+        while right < len(s):
+            if s[right] not in substr:
+                substr += s[right]
+                right += 1
+            else:
+                left = s.index(s[right], left) + 1
+                right += 1
+                substr = s[left:right]
+            maximum = max(maximum, len(substr))
+        return maximum

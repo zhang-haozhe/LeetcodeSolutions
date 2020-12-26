@@ -1,41 +1,43 @@
-# 1184. Distance Between Bus Stops
+# 3. Longest Substring Without Repeating Characters
 
-A bus has n stops numbered from 0 to n - 1 that form a circle. We know the distance between all pairs of neighboring stops where distance[i] is the distance between the stops number i and (i + 1) % n.
-
-The bus goes along both directions i.e. clockwise and counterclockwise.
-
-Return the shortest distance between the given start and destination stops.
+Given a string s, find the length of the longest substring without repeating characters.
 
 Example 1:
 
-Input: distance = [1,2,3,4], start = 0, destination = 1
-Output: 1
-Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
-
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
 Example 2:
 
-Input: distance = [1,2,3,4], start = 0, destination = 2
-Output: 3
-Explanation: Distance between 0 and 2 is 3 or 7, minimum is 3.
-
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
 Example 3:
 
-Input: distance = [1,2,3,4], start = 0, destination = 3
-Output: 4
-Explanation: Distance between 0 and 3 is 6 or 4, minimum is 4.
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+Example 4:
+
+Input: s = ""
+Output: 0
 
 Constraints:
 
-1 <= n <= 10^4
-distance.length == n
-0 <= start, destination < n
-0 <= distance[i] <= 10^4
+0 <= s.length <= 5 \* 104
+s consists of English letters, digits, symbols and spaces.
 
 # Result:
 
-Runtime: 36 ms, faster than 97.59% of Python3 online submissions for Distance Between Bus Stops.
-Memory Usage: 14.8 MB, less than 54.98% of Python3 online submissions for Distance Between Bus Stops.
+Runtime: 56 ms, faster than 81.25% of Python3 online submissions for Longest Substring Without Repeating Characters.
+Memory Usage: 14.4 MB, less than 18.14% of Python3 online submissions for Longest Substring Without Repeating Characters.
 
 # Solution:
 
-The gist of this solution is to calculate the "straight-line" distance between two points without considering the end of the list. Thus, the start and the destination do not matter. To calculate the distance without going through the end of the list, we create pointA and pointB, corresponding to the two points with smaller or bigger index. Then, we get the distance by summing all the nodes between the two points by calling sum(distance[pointA:pointB]) and the result becomes the first distance for comparison. The second distance is calculated by summing up all the remaining nodes, so we sum the rest by deleting the used nodes for the first calculation.
+Time complexity: O(n)
+Space complexity: O(n)
+
+I approached this problem through sliding window. Each time, we test the substring bounded by the left and the right boundaries of the window. During each move, the right boundary moves right by one step and the local maximum is recorded and compared to the global maximum. Each time there is a duplicate element found, the left boundary moves to the next position of the first duplicate element's next position. This means that the program is instead going to examine the substring after the first duplicate element.
+
+However, although this algorithm only contains a while loop that makes the execution in O(n), continuous modifications to the string cause the space to be inefficient. Worst case scenario, the substring could be as long as the entire string, so the complexity is O(n) too.
