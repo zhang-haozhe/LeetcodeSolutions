@@ -1,26 +1,21 @@
-# 234. Palindrome Linked List
+# 98. Validate Binary Search Tree
 
-Given a singly linked list, determine if it is a palindrome.
+Given the root of a binary tree, determine if it is a valid binary search tree (BST).
 
-Example 1:
+A valid BST is defined as follows:
 
-Input: 1->2
-Output: false
-Example 2:
-
-Input: 1->2->2->1
-Output: true
-Follow up:
-Could you do it in O(n) time and O(1) space?
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
 
 # Result:
 
-Runtime: 68 ms, faster than 74.37% of Python3 online submissions for Palindrome Linked List.
-Memory Usage: 24.4 MB, less than 37.57% of Python3 online submissions for Palindrome Linked List.
+Runtime: 44 ms, faster than 71.00% of Python3 online submissions for Validate Binary Search Tree.
+Memory Usage: 17.5 MB, less than 5.99% of Python3 online submissions for Validate Binary Search Tree.
 
 # Solution:
 
 Time complexity: O(n)
-Space complexity: O(1)
+Space complexity: O(n)
 
-I solved this problem by first reversing the sub-linked list after the middle (the second half). By definition, if the linked list is a palindrome, the first half before the middle point and the reversed second half after the middle point should be identical. Therefore, I locate the middle point and manage to reverse the second half. Then, I compare the two halves in each step.
+For a BST, the order of in-order traversal is exactly the way to traverse each node by value. If the tree is a valid BST, the values should be incrementing and no duplicates should be found.
