@@ -1,21 +1,25 @@
-# 98. Validate Binary Search Tree
+# Jump to Last Index
 
-Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+Given a non-empty array of non-negative integers arr, where each element represents the maximum jump that we can perform from that index, create a boolean function that checks if we can reach the last index starting from the first one.
 
-A valid BST is defined as follows:
+Example 1:
 
-The left subtree of a node contains only nodes with keys less than the node's key.
-The right subtree of a node contains only nodes with keys greater than the node's key.
-Both the left and right subtrees must also be binary search trees.
+Input: arr = [3, 0, 2, 0, 2, 1, 4, 3]
+
+Output: true
+
+Explanation: we can for example jump from arr[0] to arr[2], then from arr[2] to arr[4], then from arr[4] to arr[6], then from arr[6] to arr[7] (the last index)
+
+Example 2:
+
+Input: arr = [5, 3, 2, 0, 1, 0, 4]
+
+Output: false
+
+Explanation: we have no way to reach the last index
 
 # Result:
 
-Runtime: 44 ms, faster than 71.00% of Python3 online submissions for Validate Binary Search Tree.
-Memory Usage: 17.5 MB, less than 5.99% of Python3 online submissions for Validate Binary Search Tree.
-
 # Solution:
 
-Time complexity: O(n)
-Space complexity: O(n)
-
-For a BST, the order of in-order traversal is exactly the way to traverse each node by value. If the tree is a valid BST, the values should be incrementing and no duplicates should be found.
+I approached this by using memoization. First solve the problem by recursive brute force, but when a node has been queried, it immediately returns the answer for the given node. If not queried, it stores the answer for the current node.
