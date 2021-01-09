@@ -1,22 +1,41 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
-    def flatten(self, root: TreeNode) -> None:
-        """
-        Do not return anything, modify root in-place instead.
-        """
-        if root is None:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        if headA is None or headB is None:
             return None
-        self.flatten(root.left)
-        self.flatten(root.right)
-        rightTree = root.right
-        root.right = root.left
-        root.left = None
-        temp = root
-        while temp.right != None:
-            temp = temp.right
-        temp.right = rightTree
+        
+        pA = headA
+        pB = headB
+        redirectA = True
+        redirectB = False
+        # False means headA.
+        # True means headB.
+        end = None
+        while pA is not pB:
+            if pA.next != None:
+                pA = pA.next
+            else:
+                if end is None:
+                    end = pA
+                else:
+                    if pA is not end:
+                        return None
+                pA = headB if redirectA else headA
+                redirectA = not redirectA
+                
+            if pB.next != None:
+                pB = pB.next
+            else:
+                if end is None:
+                    end = pB
+                else:
+                    if pB is not end:
+                        return None
+                pB = headB if redirectB else headA
+                redirectB = not redirectB
+        return pA
