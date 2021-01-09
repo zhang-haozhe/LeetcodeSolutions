@@ -1,25 +1,37 @@
-# Jump to Last Index
+# 114. Flatten Binary Tree to Linked List
 
-Given a non-empty array of non-negative integers arr, where each element represents the maximum jump that we can perform from that index, create a boolean function that checks if we can reach the last index starting from the first one.
+Given a binary tree, flatten it to a linked list in-place.
 
-Example 1:
+For example, given the following tree:
 
-Input: arr = [3, 0, 2, 0, 2, 1, 4, 3]
+    1
 
-Output: true
+/ \
+ 2 5
+/ \ \
+3 4 6
+The flattened tree should look like:
 
-Explanation: we can for example jump from arr[0] to arr[2], then from arr[2] to arr[4], then from arr[4] to arr[6], then from arr[6] to arr[7] (the last index)
-
-Example 2:
-
-Input: arr = [5, 3, 2, 0, 1, 0, 4]
-
-Output: false
-
-Explanation: we have no way to reach the last index
+1
+\
+ 2
+\
+ 3
+\
+ 4
+\
+ 5
+\
+ 6
 
 # Result:
 
+Runtime: 36 ms, faster than 76.58% of Python3 online submissions for Flatten Binary Tree to Linked List.
+Memory Usage: 15.1 MB, less than 73.99% of Python3 online submissions for Flatten Binary Tree to Linked List.
+
 # Solution:
 
-I approached this by using memoization. First solve the problem by recursive brute force, but when a node has been queried, it immediately returns the answer for the given node. If not queried, it stores the answer for the current node.
+Time complexity: O(n)
+Space complexity: O(h), where h is the height of the tree
+
+My solution approaches the problem by using the preorder traversal. Each time the cursor goes to a node, it makes the left tree the right tree, while the right tree attached to the end of the new right tree.
