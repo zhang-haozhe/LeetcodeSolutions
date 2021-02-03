@@ -48,16 +48,18 @@ class Solution:
 
         for x in range(1, len(model)):
             for y in range(1, len(model[0])):
-                up = model[x - 1][y]
-                left = model[x][y - 1]
+                # up = model[x - 1][y]
+                # left = model[x][y - 1]
 
-                if x - 2 >= 0 and y - 1 >= 0 and obstacleGrid[x - 2][y - 1] == 1:
-                    up = 0
+                model[x][y] += 0 if x - 2 >= 0 and y - 1 >= 0 and obstacleGrid[x - 2][y - 1] == 1 else model[x - 1][y]
+                model[x][y] += 0 if x - 1 >= 0 and y - 2 >= 0 and obstacleGrid[x - 1][y - 2] == 1 else model[x][y - 1]
+                # if x - 2 >= 0 and y - 1 >= 0 and obstacleGrid[x - 2][y - 1] == 1:
+                #     up = 0
 
-                if x - 1 >= 0 and y - 2 >= 0 and obstacleGrid[x - 1][y - 2] == 1:
-                    left = 0
+                # if x - 1 >= 0 and y - 2 >= 0 and obstacleGrid[x - 1][y - 2] == 1:
+                #     left = 0
                 
-                model[x][y] = up + left
+                # model[x][y] = up + left
         
         return model[-1][-1]
 
