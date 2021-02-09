@@ -1,25 +1,15 @@
-from typing import List
-
-
 class Solution:
-    def minPathSum(self, grid: List[List[int]]) -> int:
- 
-        matrix = []
-        for _ in range(len(grid) + 1):
-            matrix.append([0] * (len(grid[0]) + 1))
-
-        for x in range(1, len(matrix)):
-            for y in range(1, len(matrix[0])):
-                if x != 1 and y != 1:
-                    matrix[x][y] = grid[x - 1][y - 1] + min(matrix[x - 1][y], matrix[x][y - 1])
-                elif x == 1 and y != 1:
-                    matrix[x][y] = grid[x - 1][y - 1] +  matrix[x][y - 1]
-                elif x != 1 and y == 1:
-                    matrix[x][y] = grid[x - 1][y - 1] +  matrix[x - 1][y]
-                else:
-                    matrix[x][y] = grid[x - 1][y - 1] 
+    def minDistance(self, word1: str, word2: str) -> int:
+        dp = []
+        for _ in range(len(word2)+1): dp.append([0]*(len(word1)+1))
+        for i in range(len(word1)+1): dp[0][i] = i
+        for i in range(len(word2)+1): dp[i][0] = i
         
-        return matrix[-1][-1]
-
-sol = Solution()
-print(sol.minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
+        for x in range(1, len(dp)):
+            for y in range(1, len(dp[0])):
+                if word1[y-1] == word2[x-1]:
+                    dp[x][y] = dp[x-1][y-1]
+                else:
+                    dp[x][y] = 1 + min(dp[x-1][y], dp[x][y-1], dp[x-1][y-1])
+        
+        return dp[-1][-1]

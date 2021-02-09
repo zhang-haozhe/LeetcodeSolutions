@@ -1,36 +1,55 @@
-# 64. Minimum Path Sum
+# 72. Edit Distance
 
-Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.
+Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
 
-Note: You can only move either down or right at any point in time.
+You have the following three operations permitted on a word:
+
+Insert a character
+Delete a character
+Replace a character
 
 Example 1:
 
-Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
-Output: 7
-Explanation: Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
+Input: word1 = "horse", word2 = "ros"
+Output: 3
+Explanation:
+horse -> rorse (replace 'h' with 'r')
+rorse -> rose (remove 'r')
+rose -> ros (remove 'e')
 Example 2:
 
-Input: grid = [[1,2,3],[4,5,6]]
-Output: 12
+Input: word1 = "intention", word2 = "execution"
+Output: 5
+Explanation:
+intention -> inention (remove 't')
+inention -> enention (replace 'i' with 'e')
+enention -> exention (replace 'n' with 'x')
+exention -> exection (replace 'n' with 'c')
+exection -> execution (insert 'u')
 
 Constraints:
 
-m == grid.length
-n == grid[i].length
-1 <= m, n <= 200
-0 <= grid[i][j] <= 100
+0 <= word1.length, word2.length <= 500
+word1 and word2 consist of lowercase English letters.
 
 # Result:
 
-Runtime: 92 ms, faster than 91.90% of Python3 online submissions for Minimum Path Sum.
-Memory Usage: 15.6 MB, less than 82.71% of Python3 online submissions for Minimum Path Sum.
+Runtime: 168 ms, faster than 70.72% of Python3 online submissions for Edit Distance.
+Memory Usage: 17.7 MB, less than 64.29% of Python3 online submissions for Edit Distance.
 
 # Solution:
 
-Time complexity: O(m _ n)
-Space complexity: O(m _ n)
+Time complexity: O(m \* n)
+Space complexity: O(m \* n)
 
 where m \* n is the size of the original matrix.
 
-Quite similar to 62 and 63. This time it only calculates the minimum between the one from the left and the one from the top. Then the value of the cell is calculated by adding the result to the original value in the grid.
+In this question, supposed that we are checking word 1 against word 2, where i and j represent the index of the characters iterated in word 1 and word 2, respectively, the three operations (insert, delete, replace) can be viewed as:
+
+1. i jumps to the next position, leaving j unchanged
+2. j jumps to the next position, leaving i unchanged
+3. i and j both jump to the next positions.
+
+At each step, find out the minimum of the three choices and fill the result into the dp matrix.
+
+Note that there is a case that the characters being checked are identical, which means that no operations need to be performed. In this case, just paste the result from the last step (i-1 and j-1).
