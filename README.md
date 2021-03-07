@@ -1,1 +1,1 @@
-Matrix Multiplication in JS
+Minimum Matrix Path Sum solved in JS
