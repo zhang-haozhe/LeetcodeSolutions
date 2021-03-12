@@ -1,18 +1,43 @@
-function minPathSum(matrix) {
-	// write code here
-	let dp = [];
-	for (let i = 0; i < matrix.length + 1; i++) {
-		dp.push(Array(matrix[0].length + 1).fill(Infinity));
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var swapNodes = function (head, k) {
+	var length_node = head;
+	var length = 0;
+
+	while (length_node !== null) {
+		length_node = length_node.next;
+		length++;
 	}
-	dp[0][1] = 0;
-	for (let i = 1; i < dp.length; i++) {
-		for (let j = 1; j < dp[0].length; j++) {
-			dp[i][j] =
-				Math.min(dp[i - 1][j], dp[i][j - 1]) + matrix[i - 1][j - 1];
+
+	var neg = head;
+	var pos = head;
+	var index_neg = 0;
+	var index_pos = 0;
+
+	while (index_neg !== length - k || index_pos !== k - 1) {
+		if (index_neg !== length - k) {
+			index_neg++;
+			neg = neg.next;
+		}
+		if (index_pos !== k - 1) {
+			index_pos++;
+			pos = pos.next;
 		}
 	}
-	return dp.pop().pop();
-}
-module.exports = {
-	minPathSum: minPathSum,
+
+	temp = neg.val;
+	neg.val = pos.val;
+	pos.val = temp;
+
+	return head;
 };
