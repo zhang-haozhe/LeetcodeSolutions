@@ -1,43 +1,45 @@
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @param {number} k
- * @return {ListNode}
- */
-var swapNodes = function (head, k) {
-	var length_node = head;
-	var length = 0;
+// react
 
-	while (length_node !== null) {
-		length_node = length_node.next;
-		length++;
+const cutOff = (data) => {
+	let arr = new Array()
+	for 每100字节{
+		arr.push[data.slice()]
 	}
+	return array
+}
 
-	var neg = head;
-	var pos = head;
-	var index_neg = 0;
-	var index_pos = 0;
+const page = (data) =>{
+	let prevDate = new Date()
+	let scroll = 0
+	
+	return(
+		<div id="container">
+			<p>{data.slice(scroll , scroll + 1000)}</p>
+		</div>
+	)
 
-	while (index_neg !== length - k || index_pos !== k - 1) {
-		if (index_neg !== length - k) {
-			index_neg++;
-			neg = neg.next;
-		}
-		if (index_pos !== k - 1) {
-			index_pos++;
-			pos = pos.next;
-		}
+
+containerElement.addEventListener("scroll", ()=>{
+	let date = new Date()
+	// 当下
+
+	if (date - prevDate > 3000ms){
+		prevDate = date
+		scroll = distanceFromTop / totalDistance
 	}
+}
 
-	temp = neg.val;
-	neg.val = pos.val;
-	pos.val = temp;
+const temp = () => {
+	let prevDate = 
+	setTimeout(()=>{
+		// let date = new Date()
+		// if (date - prevDate > 3000ms){
+		// 	return [distanceFromTop / totalDistance, date]
+		// }
+		// return prevDate
 
-	return head;
-};
+	}, 3000)
+}
+
+ let sum = Sum(1)
+ sum(2)
