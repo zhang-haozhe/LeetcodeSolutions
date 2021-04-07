@@ -1,37 +1,37 @@
-# 24. Swap Nodes in Pairs
+# 15. 3Sum
 
-Given a linked list, swap every two adjacent nodes and return its head.
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
 
 Example 1:
 
-Input: head = [1,2,3,4]
-Output: [2,1,4,3]
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
 Example 2:
 
-Input: head = []
+Input: nums = []
 Output: []
 Example 3:
 
-Input: head = [1]
-Output: [1]
+Input: nums = [0]
+Output: []
 
 Constraints:
 
-The number of nodes in the list is in the range [0, 100].
-0 <= Node.val <= 100
-
-Follow up: Can you solve the problem without modifying the values in the list's nodes? (i.e., Only nodes themselves may be changed.)
+0 <= nums.length <= 3000
+-105 <= nums[i] <= 105
 
 # Result:
 
-Runtime: 24 ms, faster than 95.95% of Python3 online submissions for Swap Nodes in Pairs.
-Memory Usage: 14 MB, less than 99.24% of Python3 online submissions for Swap Nodes in Pairs.
+Runtime: 844 ms, faster than 73.87% of Python3 online submissions for 3Sum.
+Memory Usage: 17.4 MB, less than 74.05% of Python3 online submissions for 3Sum.
 
 # Solution:
 
-Time complexity: O(n)
+Time complexity: O(n^2)
 Space complexity: O(1)
 
-Declare the pointers first. In edge cases like [] or [1], the try-except block will be triggered and throw "return head" while the right pointer does not have the next node or does not have its value.
+Sliding window/two pointer. First, we can take the solution as comparing the sum of three values in the list, a, b, and c. To solve this problem, the list needs to be sorted. In this solution, we define a as the first one to iterate through the list, b (l) as the left boundary, and c (r) as the right boundary. Since the target that we are looking for is 0, then we only need to shift the boundaries by doing so: if a + b + c > 0, then the right boundary shifts left by one to decrease the total sum, and the left one shifts right vice versa.
 
-Then, the two nodes iterate through the linked list by two steps each time. In each iteration, swap the values of the two nodes.
+Edge cases come in in case of duplicates. Therefore, to avoid duplicates, when changing the values of a and c, we always shift them until they are different from the previous values.
