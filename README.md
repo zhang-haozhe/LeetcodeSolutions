@@ -1,27 +1,37 @@
-# 16. 3Sum Closest
+# 238. Product of Array Except Self
 
-Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
 Example 1:
 
-Input: nums = [-1,2,1,-4], target = 1
-Output: 2
-Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+Example 2:
+
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
 
 Constraints:
 
-3 <= nums.length <= 10^3
--10^3 <= nums[i] <= 10^3
--10^4 <= target <= 10^4
+2 <= nums.length <= 105
+-30 <= nums[i] <= 30
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+Follow up:
+
+Could you solve it in O(n) time complexity and without using division?
+Could you solve it with O(1) constant space complexity? (The output array does not count as extra space for space complexity analysis.)
 
 # Result:
 
-Runtime: 92 ms, faster than 98.11% of Python3 online submissions for 3Sum Closest.
-Memory Usage: 14.2 MB, less than 88.86% of Python3 online submissions for 3Sum Closest.
+Runtime: 248 ms, faster than 39.12% of Python3 online submissions for Product of Array Except Self.
+Memory Usage: 22.6 MB, less than 7.37% of Python3 online submissions for Product of Array Except Self.
 
 # Solution:
 
-Time complexity: O(n^2)
-Space complexity: O(1)
+Time complexity: O(n)
+Space complexity: O(n)
 
-A problem very similar to 3 sum. The only difference here is to keep track of the sum with the minimal difference from the target.
+The gist to solve this problem is to store the products from left and the products from right. Therefore, we create two arrays to store the products. After that, create an array that stores the products of these two arrays on the corresponding positions.
