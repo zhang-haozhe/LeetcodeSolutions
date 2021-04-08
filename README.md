@@ -32,6 +32,6 @@ Memory Usage: 22.6 MB, less than 7.37% of Python3 online submissions for Product
 # Solution:
 
 Time complexity: O(n)
-Space complexity: O(n)
+Space complexity: O(1)
 
 The gist to solve this problem is to store the products from left and the products from right. Therefore, we create two arrays to store the products. After that, create an array that stores the products of these two arrays on the corresponding positions.

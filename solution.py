@@ -1,12 +1,18 @@
-class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        prodLeft = [1] * length
-        prodRight = [1] * length
-        
-        for i in range(1, length):
-            prodLeft[i] = prodLeft[i - 1] * nums[i - 1]
-            prodRight[-i - 1] = prodRight[-i] * nums[-i]
-        
-        prod = [prodLeft[x] * prodRight[x] for x in range(length)]
-        return prod
+
+from typing import List
+
+
+def productExceptSelf(nums: List[int]) -> List[int]:
+    length = len(nums)
+    res = [1] * length
+    right = 1
+    
+    for i in range(1, length):
+        res[i] = res[i - 1] * nums[i - 1]
+    
+    for i in range(1, length + 1):
+        res[-i] *= right
+        right *= nums[-i]
+    return res
+    
+print(productExceptSelf([-1,1,0,-3,3]))
