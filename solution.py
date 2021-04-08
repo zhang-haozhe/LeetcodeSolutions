@@ -1,9 +1,11 @@
 from typing import List
+from math import inf
 
-
-def threeSum(nums: List[int]) -> List[List[int]]:
+def threeSumClosest(nums: List[int], target: int) -> int:
     nums.sort()
-    res = []
+    diff = inf
+    sum_global = 0
+    
     for i, a in enumerate(nums):
         if i > 0 and a == nums[i - 1]:
             continue
@@ -11,16 +13,18 @@ def threeSum(nums: List[int]) -> List[List[int]]:
         l, r = i + 1, len(nums) - 1
         while r > l:
             total = a + nums[l] + nums[r]
-            if total == 0:
-                res.append([a, nums[l], nums[r]])
-                r -= 1
-                while r > i and nums[r + 1] == nums[r]:
-                    r -= 1
-            elif total > 0:
-                r -= 1
+            if total == target:
+                return total
             else:
-                l += 1
+                if total > target:
+                    r -= 1
+                elif total < target:
+                    l += 1
+                curr_diff = abs(target - total)
+                if curr_diff < diff: 
+                    sum_global = total
+                    diff = curr_diff
+                
+    return sum_global
 
-    return res
-
-print(threeSum([-1,0,1,2,-1,-4]))
+print(threeSumClosest([-1,2,1,-4],1))
