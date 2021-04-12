@@ -1,18 +1,21 @@
 class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
-        nums = list(filter(lambda x: x > 0, nums))
-        
-        if nums == [] or min(nums) != 1:
-            return 1
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        new_arr = ["".join(sorted(x)) for x in strs]
         
         the_map = {}
-        smallest = max(nums) + 1
         
-        for num in nums:
-            the_map[num] = num + 1
+        for i, x in enumerate(new_arr):
+            if x in the_map:
+                the_map[x].append(i)
+            else:
+                the_map[x] = [i]
         
-        for key in the_map.keys():
-            if not the_map[key] in the_map:
-                smallest = min(smallest, the_map[key])
+        res = []
+        for arr in the_map.values():
+            temp = []
+            for elem in arr:
+                temp.append(strs[elem])
+            res.append(temp)
         
-        return smallest
+        return res
