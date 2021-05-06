@@ -1,21 +1,17 @@
+from itertools import combinations
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-
-        new_arr = ["".join(sorted(x)) for x in strs]
+    def recur(self, nums, level, output):
+        if level > len(nums):
+            return output
         
-        the_map = {}
+        for i in combinations(nums, level):
+            output.append(list(i))
         
-        for i, x in enumerate(new_arr):
-            if x in the_map:
-                the_map[x].append(i)
-            else:
-                the_map[x] = [i]
+        return self.recur(nums, level + 1, output)
+    
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        output = []
         
-        res = []
-        for arr in the_map.values():
-            temp = []
-            for elem in arr:
-                temp.append(strs[elem])
-            res.append(temp)
-        
-        return res
+        output = self.recur(nums, 1, output)
+        output.append([])
+        return output

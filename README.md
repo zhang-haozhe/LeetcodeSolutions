@@ -1,38 +1,34 @@
-# 49. Group Anagrams
+# 78. Subsets
 
-Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+Given an integer array nums of unique elements, return all possible subsets (the power set).
 
-An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+The solution set must not contain duplicate subsets. Return the solution in any order.
 
 Example 1:
 
-Input: strs = ["eat","tea","tan","ate","nat","bat"]
-Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 Example 2:
 
-Input: strs = [""]
-Output: [[""]]
-Example 3:
-
-Input: strs = ["a"]
-Output: [["a"]]
+Input: nums = [0]
+Output: [[],[0]]
 
 Constraints:
 
-1 <= strs.length <= 104
-0 <= strs[i].length <= 100
-strs[i] consists of lower-case English letters.
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+All the numbers of nums are unique.
 
 # Result:
 
-Runtime: 88 ms, faster than 95.50% of Python3 online submissions for Group Anagrams.
-Memory Usage: 18.4 MB, less than 27.91% of Python3 online submissions for Group Anagrams.
+Runtime: 24 ms, faster than 98.46% of Python3 online submissions for Subsets.
+Memory Usage: 14.5 MB, less than 19.30% of Python3 online submissions for Subsets.
 
 # Solution:
 
-Time complexity: O(n^2) (but actually O(n) in practice)
+Time complexity: O(n ^ min{k, n-k} \* n)
 Space complexity: O(n)
 
-First make a new list of sorted strings. Then, map the sorted strings to their original positions in the list. Once done, put the strings with the same sorted string together in one array and then return the list of such arrays.
+This problem is solved by taking all possible combinations at each level, i.e., taking combinations for 1 number, 2 numbers, then 3 numbers for [1,2,3]. At the end, append [] to the output list.
 
-There are indeed two nested loops, but in total they only execute n times rather than n^2, where n is the length of the list.
+I believe the time complexity for this question is O(n ^ min{k, n-k} \* n), where n is the length of nums, and k is the number of numbers selected for combination. The time complexity is O(n ^ min{k, n-k}) for combination as defined by itself. In this function, we do n times of combination calculations because n also represents the number of levels.
