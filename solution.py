@@ -1,17 +1,23 @@
-from itertools import combinations
+from copy import deepcopy
+
 class Solution:
-    def recur(self, nums, level, output):
-        if level > len(nums):
-            return output
-        
-        for i in combinations(nums, level):
-            output.append(list(i))
-        
-        return self.recur(nums, level + 1, output)
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        return self.recursion(nums)
     
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        output = []
-        
-        output = self.recur(nums, 1, output)
-        output.append([])
-        return output
+    def recursion(self, nums):
+        if len(nums) == 2:
+            return [nums, nums[::-1]]
+        elif len(nums) < 2:
+            return [nums]
+        else:
+            subArrays = self.recursion(nums[1:])
+            head = nums[0]
+            
+            perm = list()
+            for i in range(len(subArrays)):
+                for j in range(len(subArrays[0]) + 1):
+                    temp = deepcopy(subArrays[i]) 
+                    temp.insert(j, head)
+                    perm.append(temp)
+            
+            return perm
