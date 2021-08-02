@@ -41,9 +41,9 @@ class Solution:
             else:
                 output[i].next.next.next = None
 
-lst = [1]
-head = list_to_link(lst)
+# lst = [1]
+# head = list_to_link(lst)
 
-sol = Solution()
-sol.reorderList(head)
-print_list(head)
+# sol = Solution()
+# sol.reorderList(head)
+# print_list(head)
