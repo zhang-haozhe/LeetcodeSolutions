@@ -1,47 +1,37 @@
-# 25. Reverse Nodes in k-Group
+# 143. Reorder List
 
-Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
+You are given the head of a singly linked-list. The list can be represented as:
 
-k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
 
-You may not alter the values in the list's nodes, only nodes themselves may be changed.
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
 
 Example 1:
 
-Input: head = [1,2,3,4,5], k = 2
-Output: [2,1,4,3,5]
+Input: head = [1,2,3,4]
+Output: [1,4,2,3]
 Example 2:
 
-Input: head = [1,2,3,4,5], k = 3
-Output: [3,2,1,4,5]
-Example 3:
-
-Input: head = [1,2,3,4,5], k = 1
-Output: [1,2,3,4,5]
-Example 4:
-
-Input: head = [1], k = 1
-Output: [1]
+Input: head = [1,2,3,4,5]
+Output: [1,5,2,4,3]
 
 Constraints:
 
-The number of nodes in the list is in the range sz.
-1 <= sz <= 5000
-0 <= Node.val <= 1000
-1 <= k <= sz
-
-Follow-up: Can you solve the problem in O(1) extra memory space?
+The number of nodes in the list is in the range [1, 5 * 104].
+1 <= Node.val <= 1000
 
 # Result:
 
-Runtime: 44 ms, faster than 92.96% of Python3 online submissions for Reverse Nodes in k-Group.
-Memory Usage: 15 MB, less than 93.01% of Python3 online submissions for Reverse Nodes in k-Group.
+Runtime: 68 ms, faster than 100.00% of Python3 online submissions for Reorder List.
+Memory Usage: 23.4 MB, less than 18.63% of Python3 online submissions for Reorder List.
 
 # Solution:
 
 Time complexity: O(n)
-Space complexity: O(1)
+Space complexity: O(n)
 
-Back-tracking is the key to this problem. We step into the list by every k nodes, and when it reaches the end or when there are less than k nodes at the end, we start to back track. The previous group reverses itself, links to the head of the next node, and then return its head after the reverse.
+I solved this problem by converting the linked list to a list. Once a list is formed, the head node points to the tail node, and then the tail node points to the head node's next node, so on so forth. At the end, the last node points to None to end the linked list.
 
-Since we only traverse through each node once, the time complexity is O(n). We are not creating any extra data structure but just creating nodes, the space complexity is O(1).
+Because we create a list to store the linked list, the space complexity is O(n), and since we only traverse through each node one time, the time complexity is also O(n).
