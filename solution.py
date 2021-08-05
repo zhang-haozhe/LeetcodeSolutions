@@ -17,33 +17,31 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def reorderList(self, head: ListNode) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        try:
-            temp = head.next.next
-        except:
-            return head
-        output = list()
+    def sortList(self, head: ListNode) -> ListNode:
         temp = head
-        while temp is not None:
-            output.append(temp)
+        nodes = []
+        
+        while temp != None:
+            nodes.append(temp)
             temp = temp.next
-
-        for i in range(len(output) // 2):
-            temp = output[i].next
-            output[i].next = output[-i - 1]
-            output[-i - 1].next = temp
-        else:
-            if len(output) % 2 == 0:
-                output[i].next.next = None
+        
+        nodes.sort(key=lambda x: x.val)
+        
+        node = None
+        
+        for index, key in enumerate(nodes):
+            if index == 0:
+                node = key
             else:
-                output[i].next.next.next = None
+                node.next = key
+                node = node.next
+        else:
+            node.next = None
+        return nodes[0]
 
-# lst = [1]
-# head = list_to_link(lst)
+lst = [4,2,1,3]
+head = list_to_link(lst)
 
-# sol = Solution()
-# sol.reorderList(head)
-# print_list(head)
+sol = Solution()
+sol.sortList(head)
+print_list(head)

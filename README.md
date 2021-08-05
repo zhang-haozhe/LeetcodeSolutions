@@ -1,37 +1,35 @@
-# 143. Reorder List
+# 148. Sort List
 
-You are given the head of a singly linked-list. The list can be represented as:
+Given the head of a linked list, return the list after sorting it in ascending order.
 
-L0 → L1 → … → Ln - 1 → Ln
-Reorder the list to be on the following form:
-
-L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
-You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+Follow up: Can you sort the linked list in O(n logn) time and O(1) memory (i.e. constant space)?
 
 Example 1:
 
-Input: head = [1,2,3,4]
-Output: [1,4,2,3]
+Input: head = [4,2,1,3]
+Output: [1,2,3,4]
 Example 2:
 
-Input: head = [1,2,3,4,5]
-Output: [1,5,2,4,3]
+Input: head = [-1,5,3,4,0]
+Output: [-1,0,3,4,5]
+Example 3:
+
+Input: head = []
+Output: []
 
 Constraints:
 
-The number of nodes in the list is in the range [1, 5 * 104].
-1 <= Node.val <= 1000
+The number of nodes in the list is in the range [0, 5 * 104].
+-105 <= Node.val <= 105
 
 # Result:
 
-Runtime: 68 ms, faster than 100.00% of Python3 online submissions for Reorder List.
-Memory Usage: 23.4 MB, less than 18.63% of Python3 online submissions for Reorder List.
+Runtime: 176 ms, faster than 91.51% of Python3 online submissions for Sort List.
+Memory Usage: 30.3 MB, less than 44.00% of Python3 online submissions for Sort List.
 
 # Solution:
 
-Time complexity: O(n)
+Time complexity: O(nlogn)
 Space complexity: O(n)
 
-I solved this problem by converting the linked list to a list. Once a list is formed, the head node points to the tail node, and then the tail node points to the head node's next node, so on so forth. At the end, the last node points to None to end the linked list.
-
-Because we create a list to store the linked list, the space complexity is O(n), and since we only traverse through each node one time, the time complexity is also O(n).
+This is not the most ideal solution because it does not use O(1) space. The way I approach it is to first traverse through the linked list, and then save and sort each node in a list. A linked list is later created from the list and then returned. Since all nodes are saved in a list, the space complexity is O(n), and since the sorting algorithm is the built-in quick sort, the time complexity is O(nlogn).
