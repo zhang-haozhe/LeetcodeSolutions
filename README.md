@@ -1,26 +1,35 @@
-# 234. Palindrome Linked List
+# 92. Reverse Linked List II
 
-Given a singly linked list, determine if it is a palindrome.
+Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
 
 Example 1:
 
-Input: 1->2
-Output: false
+Input: head = [1,2,3,4,5], left = 2, right = 4
+Output: [1,4,3,2,5]
 Example 2:
 
-Input: 1->2->2->1
-Output: true
-Follow up:
-Could you do it in O(n) time and O(1) space?
+Input: head = [5], left = 1, right = 1
+Output: [5]
+
+Constraints:
+
+The number of nodes in the list is n.
+1 <= n <= 500
+-500 <= Node.val <= 500
+1 <= left <= right <= n
+
+Follow up: Could you do it in one pass?
 
 # Result:
 
-Runtime: 68 ms, faster than 74.37% of Python3 online submissions for Palindrome Linked List.
-Memory Usage: 24.4 MB, less than 37.57% of Python3 online submissions for Palindrome Linked List.
+Runtime: 28 ms, faster than 84.50% of Python3 online submissions for Reverse Linked List II.
+Memory Usage: 14.2 MB, less than 89.90% of Python3 online submissions for Reverse Linked List II.
 
 # Solution:
 
 Time complexity: O(n)
 Space complexity: O(1)
 
-I solved this problem by first reversing the sub-linked list after the middle (the second half). By definition, if the linked list is a palindrome, the first half before the middle point and the reversed second half after the middle point should be identical. Therefore, I locate the middle point and manage to reverse the second half. Then, I compare the two halves in each step.
+This solution is not one pass. First, the iterator traverses through the linked list till it finds the two boundaries. Save the node after the right boundary, and then point the next node of the right boundary to none. Then, reverse the list after the left boundary. Once done, point the last node of the finished list to the saved node. If there are nodes before the reversed section, re-link it to the reversed part. If not, set the head to the head of the reversed part.
+
+Since we only traverse through the list at most twice, the time complexity is O(n). We do not create any extra data structure, so the space complexity is O(1).

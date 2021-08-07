@@ -4,44 +4,38 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, root, prev):
-        # your code here
-        c = root
-        b = prev
+    def reverse(self, head):
         a = None
-        default = root
-        while c != None:
-            a = b
-            b = c
+        b, c = head, head
+        while c is not None:
             c = c.next
             b.next = a
-        default.next = None
-        return b
-    def isPalindrome(self, head: ListNode) -> bool:
-        length = 0
-        curr = head
-        while curr != None:
-            curr = curr.next
-            length += 1
+            a = b
+            b = c
+        return a
         
-        if length <= 1:
-            return True
-        
-        start = head
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        leftNode, rightNode = None, None
+        temp = head
         prev = None
-        constant = 1 if length % 2 == 1 else 0
-        for _ in range(length // 2 + constant):
-            prev = start
-            start = start.next
+        before = None
+        cnt = 1
+        while temp != None:
+            if cnt == left:
+                leftNode = temp
+                before = prev
+            if cnt == right:
+                rightNode = temp
+            prev = temp
+            temp = temp.next
+            cnt += 1
+        after = rightNode.next
+        rightNode.next = None
         
-        if length // 2 != 1:
-            prev.next = self.reverseList(start, prev)
-        curr = head
-        curr2 = prev.next
-        for _ in range(length // 2):
-            if curr.val == curr2.val:
-                curr = curr.next
-                curr2 = curr2.next
-            else:
-                return False
-        return True
+        if before is not None:
+            before.next = self.reverse(leftNode)
+        else:
+            head = self.reverse(leftNode)
+        leftNode.next = after
+        return head
+        
