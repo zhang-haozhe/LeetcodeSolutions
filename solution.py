@@ -1,41 +1,15 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
-    def reverse(self, head):
-        a = None
-        b, c = head, head
-        while c is not None:
-            c = c.next
-            b.next = a
-            a = b
-            b = c
-        return a
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        if not arr:
+            return -1
         
-    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
-        leftNode, rightNode = None, None
-        temp = head
-        prev = None
-        before = None
-        cnt = 1
-        while temp != None:
-            if cnt == left:
-                leftNode = temp
-                before = prev
-            if cnt == right:
-                rightNode = temp
-            prev = temp
-            temp = temp.next
-            cnt += 1
-        after = rightNode.next
-        rightNode.next = None
-        
-        if before is not None:
-            before.next = self.reverse(leftNode)
-        else:
-            head = self.reverse(leftNode)
-        leftNode.next = after
-        return head
-        
+        start, end = 0, len(arr) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if arr[mid] > arr[mid - 1]:
+                start = mid
+            else:
+                end = mid
+        if arr[start] > arr[end]:
+            return start
+        return end

@@ -1,35 +1,52 @@
-# 92. Reverse Linked List II
+# 852. Peak Index in a Mountain Array
 
-Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
+Let's call an array arr a mountain if the following properties hold:
+
+arr.length >= 3
+There exists some i with 0 < i < arr.length - 1 such that:
+arr[0] < arr[1] < ... arr[i-1] < arr[i]
+arr[i] > arr[i+1] > ... > arr[arr.length - 1]
+Given an integer array arr that is guaranteed to be a mountain, return any i such that arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
 
 Example 1:
 
-Input: head = [1,2,3,4,5], left = 2, right = 4
-Output: [1,4,3,2,5]
+Input: arr = [0,1,0]
+Output: 1
 Example 2:
 
-Input: head = [5], left = 1, right = 1
-Output: [5]
+Input: arr = [0,2,1,0]
+Output: 1
+Example 3:
+
+Input: arr = [0,10,5,2]
+Output: 1
+Example 4:
+
+Input: arr = [3,4,5,1]
+Output: 2
+Example 5:
+
+Input: arr = [24,69,100,99,79,78,67,36,26,19]
+Output: 2
 
 Constraints:
 
-The number of nodes in the list is n.
-1 <= n <= 500
--500 <= Node.val <= 500
-1 <= left <= right <= n
+3 <= arr.length <= 104
+0 <= arr[i] <= 106
+arr is guaranteed to be a mountain array.
 
-Follow up: Could you do it in one pass?
+Follow up: Finding the O(n) is straightforward, could you find an O(log(n)) solution?
 
 # Result:
 
-Runtime: 28 ms, faster than 84.50% of Python3 online submissions for Reverse Linked List II.
-Memory Usage: 14.2 MB, less than 89.90% of Python3 online submissions for Reverse Linked List II.
+Runtime: 72 ms, faster than 81.30% of Python3 online submissions for Peak Index in a Mountain Array.
+Memory Usage: 15.3 MB, less than 57.05% of Python3 online submissions for Peak Index in a Mountain Array.
 
 # Solution:
 
-Time complexity: O(n)
+Time complexity: O(log(n))
 Space complexity: O(1)
 
-This solution is not one pass. First, the iterator traverses through the linked list till it finds the two boundaries. Save the node after the right boundary, and then point the next node of the right boundary to none. Then, reverse the list after the left boundary. Once done, point the last node of the finished list to the saved node. If there are nodes before the reversed section, re-link it to the reversed part. If not, set the head to the head of the reversed part.
+The way to resolve the problem is to use binary search. During the search, if the current value is larger than the previous value, then we reset the left boundary to the current position to ensure that it starts searching right here. Doing so ensures that the list is incrementing as it moves right too. If the list is not incrementing at the current position, then it sets the right boundary here. Once the two boundaries overlap, return the index of the bigger value of them.
 
-Since we only traverse through the list at most twice, the time complexity is O(n). We do not create any extra data structure, so the space complexity is O(1).
+Since we only traverse through the list using binary search, the time complexity is O(log(n)). We do not create any extra data structure, so the space complexity is O(1).
