@@ -1,23 +1,41 @@
 # 215. Kth Largest Element in an Array
 
-Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
+
+You must solve this problem without using the library's sort function.
 
 Example 1:
 
-Input: [3,2,1,5,6,4] and k = 2
-Output: 5
+Input: nums = [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
 Example 2:
 
-Input: [3,2,3,1,2,4,5,5,6] and k = 4
-Output: 4
-Note:
-You may assume k is always valid, 1 ≤ k ≤ array's length.
+Input: nums = [2,0,1]
+Output: [0,1,2]
+Example 3:
+
+Input: nums = [0]
+Output: [0]
+Example 4:
+
+Input: nums = [1]
+Output: [1]
+
+Constraints:
+
+n == nums.length
+1 <= n <= 300
+nums[i] is 0, 1, or 2.
+
+Follow up: Could you come up with a one-pass algorithm using only constant extra space?
 
 # Result:
 
-Runtime: 56 ms, faster than 96.02% of Python3 online submissions for Kth Largest Element in an Array.
-Memory Usage: 15.2 MB, less than 45.98% of Python3 online submissions for Kth Largest Element in an Array.
+Runtime: 36 ms, faster than 44.49% of Python3 online submissions for Sort Colors.
+Memory Usage: 14.5 MB, less than 14.23% of Python3 online submissions for Sort Colors.
 
 # Solution:
 
-The standard application of quick select.
+The standard application of merge sort.

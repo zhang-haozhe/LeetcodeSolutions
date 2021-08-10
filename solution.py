@@ -1,30 +1,45 @@
 class Solution:
-    def quickSelect(self, k, nums, start, end):
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if nums is None:
+            return
+        
+        arr = [0] * len(nums)
+        self.mergeSort(nums, 0, len(nums) - 1, arr)
+    def mergeSort(self, nums, start, end, arr):
         if start == end:
-            return nums[start]
+            return
         
-        i, j = start, end
-        pivot = nums[(i + j) // 2]
-
-        while i <= j:
-            while i <= j and nums[i] > pivot:
-                i += 1
-            while i <= j and nums[j] < pivot:
-                j -= 1
-            
-            if i <= j:
-                nums[i], nums[j] = nums[j], nums[i]
-                i += 1
-                j -= 1
-        
-        if start + k - 1 <= j:
-            return self.quickSelect(k, nums, start, j)
-        if start + k - 1 >= i:
-            return self.quickSelect(k - (i - start), nums, i, end)
-        
-        return nums[j + 1]
+        self.mergeSort(nums, start, (start + end) // 2, arr)
+        self.mergeSort(nums, (start + end) // 2 + 1, end, arr)
+        self.merge(nums, start, end, arr)
     
-    def findKthLargest(self, nums: List[int], k: int) -> int:
-        if not nums:
-            return -1
-        return self.quickSelect(k, nums, 0, len(nums) - 1)
+    def merge(self, nums, start, end, arr):
+        mid = (start + end) // 2
+        leftIndex = start
+        rightIndex = mid + 1
+        index = leftIndex
+
+        while leftIndex <= mid and rightIndex <= end:
+            if nums[leftIndex] < nums[rightIndex]:
+                arr[index] = nums[leftIndex]
+                leftIndex += 1
+            else:
+                arr[index] = nums[rightIndex]
+                rightIndex += 1
+            index += 1
+        
+        while leftIndex <= mid:
+            arr[index] = nums[leftIndex]
+            leftIndex += 1
+            index += 1
+        
+        while rightIndex <= end:
+            arr[index] = nums[rightIndex]
+            rightIndex += 1
+            index += 1
+        
+        for i in range(start, end + 1):
+            nums[i] = arr[i]
