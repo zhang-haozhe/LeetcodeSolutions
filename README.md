@@ -15,9 +15,9 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 
 # Result:
 
-Runtime: 76 ms, faster than 57.57% of Python3 online submissions for Kth Largest Element in an Array.
-Memory Usage: 14.7 MB, less than 26.14% of Python3 online submissions for Kth Largest Element in an Array.
+Runtime: 56 ms, faster than 96.02% of Python3 online submissions for Kth Largest Element in an Array.
+Memory Usage: 15.2 MB, less than 45.98% of Python3 online submissions for Kth Largest Element in an Array.
 
 # Solution:
 
-See code.
+The standard application of quick select.
