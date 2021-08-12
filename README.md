@@ -1,55 +1,37 @@
-# 338. Counting Bits
+# 674. Longest Continuous Increasing Subsequence
 
-Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+Given an unsorted array of integers nums, return the length of the longest continuous increasing subsequence (i.e. subarray). The subsequence must be strictly increasing.
+
+A continuous increasing subsequence is defined by two indices l and r (l < r) such that it is [nums[l], nums[l + 1], ..., nums[r - 1], nums[r]] and for each l <= i < r, nums[i] < nums[i + 1].
 
 Example 1:
 
-Input: n = 2
-Output: [0,1,1]
-Explanation:
-0 --> 0
-1 --> 1
-2 --> 10
+Input: nums = [1,3,5,4,7]
+Output: 3
+Explanation: The longest continuous increasing subsequence is [1,3,5] with length 3.
+Even though [1,3,5,7] is an increasing subsequence, it is not continuous as elements 5 and 7 are separated by element 4.
 Example 2:
 
-Input: n = 5
-Output: [0,1,1,2,1,2]
-Explanation:
-0 --> 0
-1 --> 1
-2 --> 10
-3 --> 11
-4 --> 100
-5 --> 101
+Input: nums = [2,2,2,2,2]
+Output: 1
+Explanation: The longest continuous increasing subsequence is [2] with length 1. Note that it must be strictly
+increasing.
 
 Constraints:
 
-0 <= n <= 105
-
-Follow up:
-
-It is very easy to come up with a solution with a runtime of O(n log n). Can you do it in linear time O(n) and possibly in a single pass?
-Can you do it without using any built-in function (i.e., like \_\_builtin_popcount in C++)?
+1 <= nums.length <= 104
+-109 <= nums[i] <= 109
 
 # Result:
 
-Runtime: 76 ms, faster than 90.34% of Python3 online submissions for Counting Bits.
-Memory Usage: 20.8 MB, less than 70.98% of Python3 online submissions for Counting Bits.
+Runtime: 76 ms, faster than 57.88% of Python3 online submissions for Longest Continuous Increasing Subsequence.
+Memory Usage: 15.3 MB, less than 82.84% of Python3 online submissions for Longest Continuous Increasing Subsequence.
 
 # Solution:
 
 Time complexity: O(n)
-Space complexity: O(n)
+Space complexity: O(1)
 
-The gist of this solution is based on the following equation:
+The code is self-explanatory.
 
-dp[i] = dp[i >> 1] + (i % 2)
-
-E.g.
-
-(170)10 = (10101010)2
-(85)10 = (1010101)2
-
-where by dividing 170 by 2, its binary form gets shifted right by one. 170's 1 bits can be converted to 170's last digit plus 85's 1 bits.
-
-Since an array with size of s is used, the space complexity is O(n). Time is O(n) because it iterates through the string by each character.
+Time is O(n) because it iterates through the string by each character. No other data structures.
