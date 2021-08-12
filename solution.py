@@ -1,45 +1,13 @@
 class Solution:
-    def sortColors(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        if nums is None:
-            return
-        
-        arr = [0] * len(nums)
-        self.mergeSort(nums, 0, len(nums) - 1, arr)
-    def mergeSort(self, nums, start, end, arr):
-        if start == end:
-            return
-        
-        self.mergeSort(nums, start, (start + end) // 2, arr)
-        self.mergeSort(nums, (start + end) // 2 + 1, end, arr)
-        self.merge(nums, start, end, arr)
-    
-    def merge(self, nums, start, end, arr):
-        mid = (start + end) // 2
-        leftIndex = start
-        rightIndex = mid + 1
-        index = leftIndex
+    def numDecodings(self, s: str) -> int:
+        if len(s) == 0:
+            return 0
+        dp = [0] * (len(s) + 1)
+        dp[0] = 1
+        for i in range(1, len(s) + 1):
+            if int(s[i - 1]) != 0:
+                dp[i] += dp[i - 1]
+            if not i == 1 and not int(s[i - 2:i]) < 10 and not int(s[i - 2:i]) > 26:
+                dp[i] += dp[i - 2]
 
-        while leftIndex <= mid and rightIndex <= end:
-            if nums[leftIndex] < nums[rightIndex]:
-                arr[index] = nums[leftIndex]
-                leftIndex += 1
-            else:
-                arr[index] = nums[rightIndex]
-                rightIndex += 1
-            index += 1
-        
-        while leftIndex <= mid:
-            arr[index] = nums[leftIndex]
-            leftIndex += 1
-            index += 1
-        
-        while rightIndex <= end:
-            arr[index] = nums[rightIndex]
-            rightIndex += 1
-            index += 1
-        
-        for i in range(start, end + 1):
-            nums[i] = arr[i]
+        return dp[-1]
