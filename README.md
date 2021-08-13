@@ -47,8 +47,8 @@ s[i] is a digit or '\*'.
 
 # Result:
 
-Runtime: 28 ms, faster than 87.98% of Python3 online submissions for Decode Ways.
-Memory Usage: 14.2 MB, less than 66.79% of Python3 online submissions for Decode Ways.
+Runtime: 857 ms, faster than 25.82% of Python3 online submissions for Decode Ways II.
+Memory Usage: 18.9 MB, less than 35.82% of Python3 online submissions for Decode Ways II.
 
 # Solution:
 
