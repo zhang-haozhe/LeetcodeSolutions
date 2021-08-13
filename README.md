@@ -59,4 +59,13 @@ The gist of this solution is based on the following equation:
 
 dp[i] = dp[i-1] (if the last digit is not zero) + dp[i - 2] (if the last two digits combined are between 10 - 26)
 
+The other issue to consider is that '_' introduces a significant level of complexity. To deal with it, we need to discuss it by case.
+There are generally 4 cases: nn, n_, _n and ** where n represents a number. nn has already been discussed and solved in decode ways I.
+For **, there are 11~19 + 21~26 so 15 cases.
+For 1_, possible cases are 11~19 so 9 cases.
+For 2*, possible cases are 21~26 so 6 cases.
+For *n, if n <= 6, possbile cases are 1n and 2n so 2 cases. If n >6, the only possble case is 1n.
+
+Note that this problem is strict with time and space. Make sure to take the modulo of the number computed each time, or the memory cannot hold.
+
 Since an array with size of s is used, the space complexity is O(n). Time is O(n) because it iterates through the string by each character.
