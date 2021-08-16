@@ -1,48 +1,38 @@
-# 73. Set Matrix Zeroes
+# 876. Middle of the Linked List
 
-Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's, and return the matrix.
+Given the head of a singly linked list, return the middle node of the linked list.
 
-You must do it in place.
+If there are two middle nodes, return the second middle node.
 
 Example 1:
 
-Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
-Output: [[1,0,1],[0,0,0],[1,0,1]]
+Input: head = [1,2,3,4,5]
+Output: [3,4,5]
+Explanation: The middle node of the list is node 3.
 Example 2:
 
-Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
-Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+Input: head = [1,2,3,4,5,6]
+Output: [4,5,6]
+Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
 
 Constraints:
 
-m == matrix.length
-n == matrix[0].length
-1 <= m, n <= 200
--231 <= matrix[i][j] <= 231 - 1
+The number of nodes in the list is in the range [1, 100].
+1 <= Node.val <= 100
 
-Follow up:
+# Result
 
-A straightforward solution using O(mn) space is probably a bad idea.
-A simple improvement uses O(m + n) space, but still not the best solution.
-Could you devise a constant space solution?
+Runtime: 32 ms, faster than 53.04% of Python3 online submissions for Middle of the Linked List.
+Memory Usage: 14.1 MB, less than 90.89% of Python3 online submissions for Middle of the Linked List.
 
-# Result:
+# Solution
 
-Runtime: 202 ms, faster than 5.01% of Python3 online submissions for Set Matrix Zeroes.
-Memory Usage: 15 MB, less than 74.78% of Python3 online submissions for Set Matrix Zeroes.
+Two pointers. We keep track of a slow pointer and a fast pointer, where the slow pointer only moves one step while the fast one moves two. By doing so, we have the progress of the slow pointer half of the fast one, so when the fast one reaches the end, the slow one indicates the middle of the list.
 
-# Solution:
+# Complexity Analysis
 
-Time complexity: O(mn)
+Time complexity: O(n)
 Space complexity: O(1)
 
-This solution follows the following steps:
-
-1. once a row is found to contain a zero, mark the row.
-2. once the row is marked, iterate through it and change all non-zero values to '%'.
-3. repeat the same process for columns.
-4. replace all cells whose values are '%' with 0.
-
-This solution traverses through each cell in the matrix once (in each iteration) and in total we repeat it 3 times. Therefore, the time complexity of this solution is O(mn), where mn is the dimension of the matrix.
-
-Since we do not use any additional space and all values are changed in-place, the space complexity is O(1).
+The fast pointer goes through the list once, so the time complexity is O(n).
+We only use two pointers without creating any new data structures, so the space complexity is O(1).
