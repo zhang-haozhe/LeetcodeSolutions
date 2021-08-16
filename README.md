@@ -1,38 +1,46 @@
-# 876. Middle of the Linked List
+# 303. Range Sum Query - Immutable
 
-Given the head of a singly linked list, return the middle node of the linked list.
+Given an integer array nums, handle multiple queries of the following type:
 
-If there are two middle nodes, return the second middle node.
+Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+Implement the NumArray class:
+
+NumArray(int[] nums) Initializes the object with the integer array nums.
+int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
 
 Example 1:
 
-Input: head = [1,2,3,4,5]
-Output: [3,4,5]
-Explanation: The middle node of the list is node 3.
-Example 2:
+Input
+["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+Output
+[null, 1, -1, -3]
 
-Input: head = [1,2,3,4,5,6]
-Output: [4,5,6]
-Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+Explanation
+NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
+numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
+numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
 
 Constraints:
 
-The number of nodes in the list is in the range [1, 100].
-1 <= Node.val <= 100
+1 <= nums.length <= 104
+-105 <= nums[i] <= 105
+0 <= left <= right < nums.length
+At most 104 calls will be made to sumRange.
 
 # Result
 
-Runtime: 32 ms, faster than 53.04% of Python3 online submissions for Middle of the Linked List.
-Memory Usage: 14.1 MB, less than 90.89% of Python3 online submissions for Middle of the Linked List.
+Runtime: 64 ms, faster than 99.31% of Python3 online submissions for Range Sum Query - Immutable.
+Memory Usage: 17.9 MB, less than 21.76% of Python3 online submissions for Range Sum Query - Immutable.
 
 # Solution
 
-Two pointers. We keep track of a slow pointer and a fast pointer, where the slow pointer only moves one step while the fast one moves two. By doing so, we have the progress of the slow pointer half of the fast one, so when the fast one reaches the end, the slow one indicates the middle of the list.
+the code is self-explanatory.
 
 # Complexity Analysis
 
-Time complexity: O(n)
-Space complexity: O(1)
+Time complexity: O(1)
+Space complexity: O(n)
 
-The fast pointer goes through the list once, so the time complexity is O(n).
-We only use two pointers without creating any new data structures, so the space complexity is O(1).
+the code is self-explanatory.
