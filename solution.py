@@ -1,41 +1,18 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
-#         self.next = next
+#         self.left = left
+#         self.right = right
 class Solution:
-    def reverse(self, head):
-        a = None
-        b, c = head, head
-        while c is not None:
-            c = c.next
-            b.next = a
-            a = b
-            b = c
-        return a
-        
-    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
-        leftNode, rightNode = None, None
-        temp = head
-        prev = None
-        before = None
-        cnt = 1
-        while temp != None:
-            if cnt == left:
-                leftNode = temp
-                before = prev
-            if cnt == right:
-                rightNode = temp
-            prev = temp
-            temp = temp.next
-            cnt += 1
-        after = rightNode.next
-        rightNode.next = None
-        
-        if before is not None:
-            before.next = self.reverse(leftNode)
-        else:
-            head = self.reverse(leftNode)
-        leftNode.next = after
-        return head
-        
+    def goodNodes(self, root: TreeNode) -> int:
+        return self.traverse(root, float('-inf'))
+    
+    def traverse(self, root, biggest):
+        if root == None:
+            return 0
+        biggest = max(biggest, root.val)
+        count = 0
+        if root.val >= biggest:
+            count = 1
+        return self.traverse(root.left, biggest) + self.traverse(root.right, biggest) + count
