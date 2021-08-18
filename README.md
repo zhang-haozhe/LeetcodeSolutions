@@ -1,37 +1,37 @@
-# 15. 3Sum
+# 18. 4Sum
 
-Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 
-Notice that the solution set must not contain duplicate triplets.
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
 
 Example 1:
 
-Input: nums = [-1,0,1,2,-1,-4]
-Output: [[-1,-1,2],[-1,0,1]]
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
 Example 2:
 
-Input: nums = []
-Output: []
-Example 3:
-
-Input: nums = [0]
-Output: []
+Input: nums = [2,2,2,2,2], target = 8
+Output: [[2,2,2,2]]
 
 Constraints:
 
-0 <= nums.length <= 3000
--105 <= nums[i] <= 105
+1 <= nums.length <= 200
+-109 <= nums[i] <= 109
+-109 <= target <= 109
 
 # Result:
 
-Runtime: 844 ms, faster than 73.87% of Python3 online submissions for 3Sum.
-Memory Usage: 17.4 MB, less than 74.05% of Python3 online submissions for 3Sum.
+Runtime: 956 ms, faster than 47.37% of Python3 online submissions for 4Sum.
+Memory Usage: 14.2 MB, less than 91.38% of Python3 online submissions for 4Sum.
 
 # Solution:
 
-Time complexity: O(n^2)
+Time complexity: O(n^3)
 Space complexity: O(1)
 
-Sliding window/two pointer. First, we can take the solution as comparing the sum of three values in the list, a, b, and c. To solve this problem, the list needs to be sorted. In this solution, we define a as the first one to iterate through the list, b (l) as the left boundary, and c (r) as the right boundary. Since the target that we are looking for is 0, then we only need to shift the boundaries by doing so: if a + b + c > 0, then the right boundary shifts left by one to decrease the total sum, and the left one shifts right vice versa.
+This is only a more complicated variant of 3 sum. To solve it, we only add pointer b, which is very similar to pointer a that we introduce in 3 sum. It then is just a O(n^2) nested loop set to iterate through each combination of a and b, and then do the same sliding window approach as we do in 3 sum.
 
-Edge cases come in in case of duplicates. Therefore, to avoid duplicates, when changing the values of a and c, we always shift them until they are different from the previous values.
+The time complexity comes from the 2 nested loops and a while loop for the sliding window for each set of (a, b). Since we dont create any extra data structure, the space complexity is O(1).
