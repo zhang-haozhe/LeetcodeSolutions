@@ -1,17 +1,21 @@
-class NumArray:
-
-    def __init__(self, nums: List[int]):
-        self.sumArr = nums
-        for i, k in enumerate(self.sumArr):
-            if i != 0:
-                self.sumArr[i] += self.sumArr[i - 1]
-        print(self.sumArr)
-
-    def sumRange(self, left: int, right: int) -> int:
-        if left - 1 < 0:
-            start = 0
-        else:
-            start = self.sumArr[left - 1]
-        end = self.sumArr[right]
+class Solution:
+    def countDigitOne(self, n: int) -> int:
+        base = 1
+        res = 0
         
-        return end - start
+        while base <= n:
+            a = n // base
+            b = n % base
+            curr = a % 10
+            a //= 10
+            
+            if curr == 1:
+                res += a * base + b + 1
+            elif curr < 1:
+                res += a * base
+            else:
+                res += (a + 1) * base
+            
+            base *= 10
+        
+        return res

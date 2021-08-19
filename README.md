@@ -1,46 +1,64 @@
-# 303. Range Sum Query - Immutable
+# 233. Number of Digit One
 
-Given an integer array nums, handle multiple queries of the following type:
-
-Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
-Implement the NumArray class:
-
-NumArray(int[] nums) Initializes the object with the integer array nums.
-int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
 
 Example 1:
 
-Input
-["NumArray", "sumRange", "sumRange", "sumRange"]
-[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
-Output
-[null, 1, -1, -3]
+Input: n = 13
+Output: 6
+Example 2:
 
-Explanation
-NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
-numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
-numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
-numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
+Input: n = 0
+Output: 0
 
 Constraints:
 
-1 <= nums.length <= 104
--105 <= nums[i] <= 105
-0 <= left <= right < nums.length
-At most 104 calls will be made to sumRange.
+0 <= n <= 109
 
 # Result
 
-Runtime: 64 ms, faster than 99.31% of Python3 online submissions for Range Sum Query - Immutable.
-Memory Usage: 17.9 MB, less than 21.76% of Python3 online submissions for Range Sum Query - Immutable.
+Runtime: 28 ms, faster than 80.15% of Python3 online submissions for Number of Digit One.
+Memory Usage: 14.4 MB, less than 12.31% of Python3 online submissions for Number of Digit One.
 
 # Solution
 
-the code is self-explanatory.
+In this question, we can split up the number into three parts:
+
+a, curr, b
+
+where curr is the current digit that we are evaluating, and a is the digts before curr, b being the digits after curr.
+
+When evaluating the number, there can be three cases:
+
+1. curr > 1
+2. curr < 1
+3. curr == 1
+
+In case 1,
+e.g.
+325 6 197
+a curr b
+where 6 is the curr. In this case, a can range from (0, 325) so 326 choices, and b can range from (0, 999), so base, which is set to be 1000.
+Therefore, case 1 yields (a + 1) \* base choices.
+
+In case 2,
+e.g.
+325 0 197
+a curr b
+where 0 is the curr. In this case, since there is no chance that we count 1 in this arrangement, a can only range from (0, 324) so 325 choices and b ranging from (0, 999) so base.
+Therefore, case 2 yields a \* base choices.
+
+In case 3,
+e.g.
+325 1 197
+a curr b
+where 0 is the curr. In this case, a can range from (0, 324) so 325 choices, and b can range from (0, 999), so base, which is set to be 1000. Then, we still need to consider the case when a = 325. When a = 325, b ranges from (0, 197).
+Therefore, case 2 yields a \* base + 1 \* (b + 1) choices.
 
 # Complexity Analysis
 
-Time complexity: O(1)
-Space complexity: O(n)
+Time complexity: O(K), where K is the number of digits of the input.
+Space complexity: O(1)
 
-the code is self-explanatory.
+The loop runs log10(n) times, which is equivalent to the number of n's digits. Therefore, the time complexity is O(K), where K = log10(n).
+Since we dont create any extra data structure, the space complexity is maintained at O(1).
