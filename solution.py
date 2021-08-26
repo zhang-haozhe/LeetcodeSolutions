@@ -1,21 +1,19 @@
-class Solution:
-    def countDigitOne(self, n: int) -> int:
-        base = 1
-        res = 0
-        
-        while base <= n:
-            a = n // base
-            b = n % base
-            curr = a % 10
-            a //= 10
-            
-            if curr == 1:
-                res += a * base + b + 1
-            elif curr < 1:
-                res += a * base
-            else:
-                res += (a + 1) * base
-            
-            base *= 10
-        
-        return res
+from math import sqrt, ceil
+
+def oneToNPrime(num):
+    arr = [True] * (num + 1)
+    arr[:2] = [False, False]
+    
+    for i in range(2, ceil(sqrt(num))):
+        if not arr[i]:
+            continue
+        j = i * 2
+        while j <= num:
+            if arr[j]:
+                arr[j] = False
+            j += i
+
+    cnt = str(arr).count("True")
+    return cnt
+
+print(oneToNPrime(1000))
