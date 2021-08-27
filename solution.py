@@ -1,19 +1,22 @@
-from math import sqrt, ceil
-
-def oneToNPrime(num):
-    arr = [True] * (num + 1)
-    arr[:2] = [False, False]
+class Solution:
+    """
+    @param n: the number of disks
+    @return: the order of moves
+    """
+    def towerOfHanoi(self, n):
+        # write your code here
+        moves = list()
+        self.helper(n, 'A', 'C', 'B', moves)
+        return moves
     
-    for i in range(2, ceil(sqrt(num))):
-        if not arr[i]:
-            continue
-        j = i * 2
-        while j <= num:
-            if arr[j]:
-                arr[j] = False
-            j += i
+    def move(self, start, end):
+        return "from " + start + " to " + end
 
-    cnt = str(arr).count("True")
-    return cnt
-
-print(oneToNPrime(1000))
+    def helper(self, n, start, end, temp, moves):
+        if n == 1:
+            moves.append(self.move(start, end))
+            return  
+        
+        self.helper(n - 1, start, temp, end, moves)
+        moves.append(self.move(start, end))
+        self.helper(n - 1, temp, end, start, moves)
