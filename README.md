@@ -1,32 +1,49 @@
-# Tower of Hanoi
+# 331. Verify Preorder Serialization of a Binary Tree
 
-Description
-Tower of Hanoi is a well-known problem.There are n plates of different sizes (radius 1-n) stacked on three pillars A, B and C.They are all stacked on A at first, your goal is moving all the plates from A to C in minimum legal steps.
-The rules of moving are as follows:
+One way to serialize a binary tree is to use preorder traversal. When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as '#'.
 
-You are allowed to move one plate once (from top of one pillar to top of another pillar)
-Ensure that the smaller plates are on the top of the bigger one,and there is nothing under the biggest plate.
+For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where '#' represents a null node.
 
-Example
+Given a string of comma-separated values preorder, return true if it is a correct preorder traversal serialization of a binary tree.
+
+It is guaranteed that each comma-separated value in the string must be either an integer or a character '#' representing null pointer.
+
+You may assume that the input format is always valid.
+
+For example, it could never contain two consecutive commas, such as "1,,3".
+Note: You are not allowed to reconstruct the tree.
+
 Example 1:
 
-Input:n = 2
-Output: ["from A to B","from A to C","from B to C"]
+Input: preorder = "9,3,4,#,#,1,#,#,2,#,6,#,#"
+Output: true
 Example 2:
 
-Input:n = 3
-Output:["from A to C","from A to B","from C to B","from A to C","from B to A","from B to C","from A to C"]
+Input: preorder = "1,#"
+Output: false
+Example 3:
+
+Input: preorder = "9,#,#,1"
+Output: false
+
+Constraints:
+
+1 <= preorder.length <= 104
+preorder consist of integers in the range [0, 100] and '#' separated by commas ','.
 
 # Result
 
-122 mstime cost
-·
-11.55 MBmemory cost
-·
-Your submission beats93.28 %Submissions
+Runtime: 32 ms, faster than 82.79% of Python3 online submissions for Verify Preorder Serialization of a Binary Tree.
+Memory Usage: 14.2 MB, less than 70.11% of Python3 online submissions for Verify Preorder Serialization of a Binary Tree.
 
 # Solution
 
-Done using binary tree inorder traversal. Each time, it reduces the problem of moving n plates to moving n - 1 plates. Since 3 pillars are given, we can treat them as start, temp, and end, respectively. Then, to move the nth plate, it first moves all the plates above it to the temp pillar, then move it to end and then move the rest from temp to end. Once the upmost plate is being moved, it skips the temp pillar as it does not need it to move to the end pillar.
+First, convert the string to an array for easy processing. Then, create a stack to resolve it: each time a node comes in, it is added to the stack with its left and right subtrees being "unresolved", as indicated by False. When a null comes in, it first tries to convert the upper level's left subtree to be "resolved". If it is already resolved, convert the right one to "resolved". In each iteration, check if the uppermost node in the stack has both subtrees resolved, and then pop it if so. In the end, if the stack is empty, return True, otherwise False. During the examination, any exception indicates the serialization is improper so return False.
 
 # Complexity Analysis
+
+Time complexity: O(n)
+Space complexity: O(n)
+
+This method queries the string exactly once, so the time complexity is O(n).
+To store the string in a structure that makes it easier for processing, an array of size n is created. Then, a stack to verify the serialization is created with size n in the worst case scenario. Therefore, the space complexity is O(n).

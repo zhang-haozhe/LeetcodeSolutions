@@ -1,22 +1,28 @@
 class Solution:
-    """
-    @param n: the number of disks
-    @return: the order of moves
-    """
-    def towerOfHanoi(self, n):
-        # write your code here
-        moves = list()
-        self.helper(n, 'A', 'C', 'B', moves)
-        return moves
-    
-    def move(self, start, end):
-        return "from " + start + " to " + end
-
-    def helper(self, n, start, end, temp, moves):
-        if n == 1:
-            moves.append(self.move(start, end))
-            return  
-        
-        self.helper(n - 1, start, temp, end, moves)
-        moves.append(self.move(start, end))
-        self.helper(n - 1, temp, end, start, moves)
+    def isValidSerialization(self, preorder: str) -> bool:
+        if preorder == '#':
+            return True
+        try:
+            arr = preorder.split(',')
+            stack = []
+            for index, node in enumerate(arr):
+                if node == '#':
+                    if not stack[-1][1]:
+                        stack[-1][1] = True
+                    elif not stack[-1][2]:
+                        stack[-1][2] = True
+                    else:
+                        return False
+                while stack and stack[-1][1] and stack[-1][2]:
+                    stack.pop()
+                    if stack and not stack[-1][1]:
+                        stack[-1][1] = True
+                    elif stack and not stack[-1][2]:
+                        stack[-1][2] = True
+                    else:
+                        return False if index != len(arr) - 1 else True
+                if node != '#':
+                    stack.append([node, False, False])
+            return True if not stack else False
+        except:
+            return False
