@@ -1,22 +1,18 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
-    def buildTree(self, inorder: List[int], postorder: List[int]):
-        return self.helper(inorder[::-1], postorder[::-1])
+    def constructFromPrePost(self, preorder, postorder):
+        return self.helper(preorder, postorder[::-1], 0, len(preorder) - 1, 0, len(preorder) - 1)
     
-    def helper(self, inorder: List[int], postorder: List[int]):
-        if len(inorder) == 0:
+    def helper(self, pre, post, pre_s, pre_e, post_s, post_e):
+        if pre_s > pre_e or post_s > post_e:
             return None
-        head = postorder.pop(0)
         
-        headIndex = inorder.index(head)
+        root = TreeNode(pre[pre_s])
+        if pre_s == pre_e:
+            return root
+        left_len = pre.index(post[post_s + 1]) - (pre_s + 1)
+        right_len = pre_e - left_len - pre_s
         
-        root = TreeNode(head)
-        root.right = self.helper(inorder[:headIndex], postorder)
-        root.left = self.helper(inorder[headIndex + 1:], postorder)
+        root.left = self.helper(pre, post, pre_s + 1, pre_s + left_len, post_s + right_len + 1, post_e)
+        root.right = self.helper(pre, post, pre_s + left_len + 1, pre_e, post_s + 1, post_s + right_len)
         
         return root

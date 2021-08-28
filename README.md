@@ -1,34 +1,42 @@
-# 106. Construct Binary Tree from Inorder and Postorder Traversal
+# 889. Construct Binary Tree from Preorder and Postorder Traversal
 
-Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.
+Given two integer arrays, preorder and postorder where preorder is the preorder traversal of a binary tree of distinct values and postorder is the postorder traversal of the same tree, reconstruct and return the binary tree.
+
+If there exist multiple answers, you can return any of them.
 
 Example 1:
 
-Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
-Output: [3,9,20,null,null,15,7]
+Input: preorder = [1,2,4,5,3,6,7], postorder = [4,5,2,6,7,3,1]
+Output: [1,2,3,4,5,6,7]
 Example 2:
 
-Input: inorder = [-1], postorder = [-1]
-Output: [-1]
+Input: preorder = [1], postorder = [1]
+Output: [1]
 
 Constraints:
 
-1 <= inorder.length <= 3000
-postorder.length == inorder.length
--3000 <= inorder[i], postorder[i] <= 3000
-inorder and postorder consist of unique values.
-Each value of postorder also appears in inorder.
-inorder is guaranteed to be the inorder traversal of the tree.
-postorder is guaranteed to be the postorder traversal of the tree.
+1 <= preorder.length <= 30
+1 <= preorder[i] <= preorder.length
+All the values of preorder are unique.
+postorder.length == preorder.length
+1 <= postorder[i] <= postorder.length
+All the values of postorder are unique.
+It is guaranteed that preorder and postorder are the preorder traversal and postorder traversal of the same binary tree.
 
 # Result:
 
-Runtime: 107 ms, faster than 50.70% of Python3 online submissions for Construct Binary Tree from Inorder and Postorder Traversal.
-Memory Usage: 53.3 MB, less than 32.42% of Python3 online submissions for Construct Binary Tree from Inorder and Postorder Traversal.
+Runtime: 52 ms, faster than 70.55% of Python3 online submissions for Construct Binary Tree from Preorder and Postorder Traversal.
+Memory Usage: 14.4 MB, less than 39.31% of Python3 online submissions for Construct Binary Tree from Preorder and Postorder Traversal.
 
 # Solution:
 
-Because the first element of the reverse of postorder represents the root of a subtree, each time we pick it as the root and construct a subtree based on it. In inorder, any nodes to its left belong to its left subtree, vice versa. Therefore, in each traversal, we denote a root and delete it from the inorder list, select the left or right subtree nodes from the inorder list and pass down to the next recursive call.
+The recursion runs by telling the function the ranges of the the left subtree and the right subtree. Each time we process a node, we also assign its left and right subtrees.
+
+First, we want to determine the length of the left subtree as denoted by subtracting the left subtree root's index by the right one. The right one's index is exactly one plus the left boundary of the subtree in preorder. The left index is a bit more complex, which is the index, in the preorder list, of the next node of the root in the postorder list, which is the root of the right subtree. Having these two numbers, the left length can be calculated.
+
+The length of the right subtree is much easier to have. It is determined by having the available range minus the left length.
+
+Once done, we only need to pass the parameters to the recursive function to get the subtrees and return the root.
 
 # Complexity analysis
 
