@@ -1,6 +1,10 @@
 # 41. First Missing Positive
 
-Given an unsorted integer array nums, find the smallest missing positive integer.
+Given an unsorted integer array nums, return the smallest missing positive integer.
+
+You must implement an algorithm that runs in O(n) time and uses constant extra space.
+
+ 
 
 Example 1:
 
@@ -14,30 +18,26 @@ Example 3:
 
 Input: nums = [7,8,9,11,12]
 Output: 1
+ 
 
 Constraints:
 
-0 <= nums.length <= 300
+1 <= nums.length <= 5 * 105
 -231 <= nums[i] <= 231 - 1
-
-Follow up: Could you implement an algorithm that runs in O(n) time and uses constant extra space?
 
 # Result:
 
-Runtime: 32 ms, faster than 83.96% of Python3 online submissions for First Missing Positive.
-Memory Usage: 14.2 MB, less than 75.30% of Python3 online submissions for First Missing Positive.
+Runtime: 916 ms, faster than 53.58% of Python3 online submissions for First Missing Positive.
+Memory Usage: 63.9 MB, less than 34.09% of Python3 online submissions for First Missing Positive.
 
 # Solution:
 
+In the first loop, we put values to the slot where they belong to, like putting 5 to the 5th slot, 3 to the 3th slot, etc. During this, we only process values that are between 1~n. Once done, we are left with all the "correct" values in their positions, seperated by values that are out of bound. Then in the second loop, we only need to iterate through the array once again to check if there is a discontinuity. If so, return it. If not, return the maximum number + 1.
+
+# Complexity analysis
+
 Time complexity: O(n)
-Space complexity: O(n)
+Space complexity: O(1)
 
-I solved this problem by using a map. The point of using a map is to skip sorting.
-
-The first step is to filter out the non-positive elements from the list, because they do not have any impact on the final result.
-
-Then, we take care of the edge cases: if the list is empty, or if it does not start from 1, 1 is the the first missing positive number, so return it.
-
-After this, we set the first missing positive to be the biggest number in the list + 1.
-
-This is when the map comes into play: it associates each number with its next positive number. When traversing through the finished map by key, once a missing number is found, the program compares the stored first missing number and the current missing number and stores the smaller one. Once done, return the smallest missing positive number it has ever found.
+In practice, the first loop is O(n) as it only swaps two values necessarily under the given condition.
+Since no other data structure is created, the space complexity is O(1).

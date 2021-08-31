@@ -1,18 +1,18 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        nums = list(filter(lambda x: x > 0, nums))
-        
-        if nums == [] or min(nums) != 1:
-            return 1
-        
-        the_map = {}
-        smallest = max(nums) + 1
-        
-        for num in nums:
-            the_map[num] = num + 1
-        
-        for key in the_map.keys():
-            if not the_map[key] in the_map:
-                smallest = min(smallest, the_map[key])
-        
-        return smallest
+        n = len(nums)
+
+        for i in range(n):
+            while nums[i] > 0 and nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                self.swap(nums, i, nums[i] - 1)
+
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+
+        return n + 1
+    
+    def swap(self, nums, i, j):
+        temp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = temp
