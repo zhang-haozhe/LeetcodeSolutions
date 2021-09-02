@@ -1,18 +1,11 @@
 class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
-        n = len(nums)
-
-        for i in range(n):
-            while nums[i] > 0 and nums[i] <= n and nums[nums[i] - 1] != nums[i]:
-                self.swap(nums, i, nums[i] - 1)
-
-        for i in range(n):
-            if nums[i] != i + 1:
-                return i + 1
-
-        return n + 1
-    
-    def swap(self, nums, i, j):
-        temp = nums[i]
-        nums[i] = nums[j]
-        nums[j] = temp
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return 1
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+        

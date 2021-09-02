@@ -1,43 +1,44 @@
-# 41. First Missing Positive
+# 300. Longest Increasing Subsequence
 
-Given an unsorted integer array nums, return the smallest missing positive integer.
+Given an integer array nums, return the length of the longest strictly increasing subsequence.
 
-You must implement an algorithm that runs in O(n) time and uses constant extra space.
+A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
 
  
 
 Example 1:
 
-Input: nums = [1,2,0]
-Output: 3
+Input: nums = [10,9,2,5,3,7,101,18]
+Output: 4
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
 Example 2:
 
-Input: nums = [3,4,-1,1]
-Output: 2
+Input: nums = [0,1,0,3,2,3]
+Output: 4
 Example 3:
 
-Input: nums = [7,8,9,11,12]
+Input: nums = [7,7,7,7,7,7,7]
 Output: 1
  
 
 Constraints:
 
-1 <= nums.length <= 5 * 105
--231 <= nums[i] <= 231 - 1
+1 <= nums.length <= 2500
+-104 <= nums[i] <= 104
 
 # Result:
 
-Runtime: 916 ms, faster than 53.58% of Python3 online submissions for First Missing Positive.
-Memory Usage: 63.9 MB, less than 34.09% of Python3 online submissions for First Missing Positive.
+Runtime: 4791 ms, faster than 11.37% of Python3 online submissions for Longest Increasing Subsequence.
+Memory Usage: 14.7 MB, less than 17.90% of Python3 online submissions for Longest Increasing Subsequence.
 
 # Solution:
 
-In the first loop, we put values to the slot where they belong to, like putting 5 to the 5th slot, 3 to the 3th slot, etc. During this, we only process values that are between 1~n. Once done, we are left with all the "correct" values in their positions, seperated by values that are out of bound. Then in the second loop, we only need to iterate through the array once again to check if there is a discontinuity. If so, return it. If not, return the maximum number + 1.
+See code.
 
 # Complexity analysis
 
-Time complexity: O(n)
-Space complexity: O(1)
+Time complexity: O(n^2)
+Space complexity: O(n)
 
-In practice, the first loop is O(n) as it only swaps two values necessarily under the given condition.
-Since no other data structure is created, the space complexity is O(1).
+Two loops nested, so O(n^2).
+One dp array to hold the answers, so O(n).
