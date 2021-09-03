@@ -1,42 +1,46 @@
-# 526. Beautiful Arrangement
+# 31. Next Permutation
 
-Suppose you have n integers labeled 1 through n. A permutation of those n integers perm (1-indexed) is considered a beautiful arrangement if for every i (1 <= i <= n), either of the following is true:
+Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 
-perm[i] is divisible by i.
-i is divisible by perm[i].
-Given an integer n, return the number of the beautiful arrangements that you can construct.
+If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+
+The replacement must be in place and use only constant extra memory.
 
  
 
 Example 1:
 
-Input: n = 2
-Output: 2
-Explanation: 
-The first beautiful arrangement is [1,2]:
-    - perm[1] = 1 is divisible by i = 1
-    - perm[2] = 2 is divisible by i = 2
-The second beautiful arrangement is [2,1]:
-    - perm[1] = 2 is divisible by i = 1
-    - i = 2 is divisible by perm[2] = 1
+Input: nums = [1,2,3]
+Output: [1,3,2]
 Example 2:
 
-Input: n = 1
-Output: 1
+Input: nums = [3,2,1]
+Output: [1,2,3]
+Example 3:
+
+Input: nums = [1,1,5]
+Output: [1,5,1]
+Example 4:
+
+Input: nums = [1]
+Output: [1]
  
 
 Constraints:
 
-1 <= n <= 15
+1 <= nums.length <= 100
+0 <= nums[i] <= 100
 
 # Result:
 
-Runtime: 1284 ms, faster than 53.56% of Python3 online submissions for Beautiful Arrangement.
-Memory Usage: 14.2 MB, less than 69.98% of Python3 online submissions for Beautiful Arrangement.
+Runtime: 46 ms, faster than 21.12% of Python3 online submissions for Next Permutation.
+Memory Usage: 14.1 MB, less than 93.09% of Python3 online submissions for Next Permutation.
 
 # Solution:
 
-Time complexity: O(n!)
-Space complexity: O(n!)
+Time complexity: O(n)
+Space complexity: O(1)
 
-Still very similar to my other permutation problem solution.
+Counting from right to left, if each digit is larger than or equal to the one to its right, then the number is at its maximum and we only need to flip it.
+
+If one is found smaller than the last digit, then we need to denote it as the destination digit. Then, swap the destination digit and the destination two digit, which is the smallest number that is larger than the destination digit in the digits to the destination digit's right. After the swap, reverse all the digits to the right of the new destination digit (by index). 
