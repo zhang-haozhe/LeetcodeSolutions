@@ -1,37 +1,42 @@
-# 47. Permutations II
+# 526. Beautiful Arrangement
 
-Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+Suppose you have n integers labeled 1 through n. A permutation of those n integers perm (1-indexed) is considered a beautiful arrangement if for every i (1 <= i <= n), either of the following is true:
+
+perm[i] is divisible by i.
+i is divisible by perm[i].
+Given an integer n, return the number of the beautiful arrangements that you can construct.
 
  
 
 Example 1:
 
-Input: nums = [1,1,2]
-Output:
-[[1,1,2],
- [1,2,1],
- [2,1,1]]
+Input: n = 2
+Output: 2
+Explanation: 
+The first beautiful arrangement is [1,2]:
+    - perm[1] = 1 is divisible by i = 1
+    - perm[2] = 2 is divisible by i = 2
+The second beautiful arrangement is [2,1]:
+    - perm[1] = 2 is divisible by i = 1
+    - i = 2 is divisible by perm[2] = 1
 Example 2:
 
-Input: nums = [1,2,3]
-Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+Input: n = 1
+Output: 1
  
 
 Constraints:
 
-1 <= nums.length <= 8
--10 <= nums[i] <= 10
+1 <= n <= 15
 
 # Result:
 
-Runtime: 56 ms, faster than 86.04% of Python3 online submissions for Permutations II.
-Memory Usage: 14.4 MB, less than 89.99% of Python3 online submissions for Permutations II.
+Runtime: 1284 ms, faster than 53.56% of Python3 online submissions for Beautiful Arrangement.
+Memory Usage: 14.2 MB, less than 69.98% of Python3 online submissions for Beautiful Arrangement.
 
 # Solution:
 
-Time complexity: O(n _ n!)
-Space complexity: O(n _ n!)
+Time complexity: O(n!)
+Space complexity: O(n!)
 
-Check out the solution to Permutation I, which is very similar. The only difference is that in each iteration, we only process the first one element if it has duplicates after as noted by "nums[i] == nums[i - 1]". 
-
-In order to know if one element has such duplicates, we need to sort the nums array at the beginning.
+Still very similar to my other permutation problem solution.
