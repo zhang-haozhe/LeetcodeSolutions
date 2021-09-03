@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+# Solution 1
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         return self.recursion(nums)
@@ -21,3 +22,21 @@ class Solution:
                     perm.append(temp)
             
             return perm
+
+# Solution 2
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        # write your code here
+        perms = []
+        self.helper(nums, perms)
+        return perms
+    
+    def helper(self, nums, perms, perm=[]):
+        if not nums:
+            perms.append(list(perm))
+            return
+        
+        for i in range(len(nums)):
+            perm.append(nums[i])
+            self.helper(nums[:i] + nums[i + 1:], perms, perm)
+            perm.pop()
