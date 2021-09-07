@@ -1,42 +1,24 @@
-from copy import deepcopy
-
-# Solution 1
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        return self.recursion(nums)
+    def letterCombinations(self, digits: str) -> List[str]:
+        if len(digits) == 0:
+            return []
+        
+        letters = [[], [], ['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'], \
+                   ['j', 'k', 'l'], ['m', 'n', 'o'], ['p', 'q', 'r', 's'], ['t', 'u', 'v'], ['w', 'x', 'y', 'z']]
+        
+        output = []
+        
+        self.helper(digits, letters, output)
+        
+        return output
     
-    def recursion(self, nums):
-        if len(nums) == 2:
-            return [nums, nums[::-1]]
-        elif len(nums) < 2:
-            return [nums]
-        else:
-            subArrays = self.recursion(nums[1:])
-            head = nums[0]
-            
-            perm = list()
-            for i in range(len(subArrays)):
-                for j in range(len(subArrays[0]) + 1):
-                    temp = deepcopy(subArrays[i]) 
-                    temp.insert(j, head)
-                    perm.append(temp)
-            
-            return perm
-
-# Solution 2
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        # write your code here
-        perms = []
-        self.helper(nums, perms)
-        return perms
-    
-    def helper(self, nums, perms, perm=[]):
-        if not nums:
-            perms.append(list(perm))
+    def helper(self, digits, letters, output, combination='', index=0):
+        if index == len(digits):
+            output.append(combination)
             return
         
-        for i in range(len(nums)):
-            perm.append(nums[i])
-            self.helper(nums[:i] + nums[i + 1:], perms, perm)
-            perm.pop()
+        letterIndex = int(digits[index])
+        for letter in letters[letterIndex]:
+            combination += letter
+            self.helper(digits, letters, output, combination, index + 1)
+            combination = combination[:-1]

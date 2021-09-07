@@ -1,34 +1,40 @@
-# 46. Permutations
+# 17. Letter Combinations of a Phone Number
 
-Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+
+
+ 
 
 Example 1:
 
-Input: nums = [1,2,3]
-Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 Example 2:
 
-Input: nums = [0,1]
-Output: [[0,1],[1,0]]
+Input: digits = ""
+Output: []
 Example 3:
 
-Input: nums = [1]
-Output: [[1]]
+Input: digits = "2"
+Output: ["a","b","c"]
+ 
 
 Constraints:
 
-1 <= nums.length <= 6
--10 <= nums[i] <= 10
-All the integers of nums are unique.
+0 <= digits.length <= 4
+digits[i] is a digit in the range ['2', '9'].
 
 # Result:
 
-Runtime: 32 ms, faster than 96.63% of Python3 online submissions for Permutations.
-Memory Usage: 14.5 MB, less than 41.47% of Python3 online submissions for Permutations.
+Runtime: 32 ms, faster than 63.78% of Python3 online submissions for Letter Combinations of a Phone Number.
+Memory Usage: 14.2 MB, less than 62.94% of Python3 online submissions for Letter Combinations of a Phone Number.
 
 # Solution:
 
-Time complexity: O(n _ n!)
-Space complexity: O(n _ n!)
+Time complexity: O(4 ** n!)
+Space complexity: O(4 ** n!)
 
-I solve this question through the divide and conquer approach. The gist of it is to break down the array until the size of the subarray equals 2, so that we can simply return an array of the input array itself and its reverse. Then, getting the two new arrays, the upper-array inserts its first element to any position of the new arrays. By doing this recursively, the problem is solved.
+Another variant of the permutation problem. The only difference is that each number is associated with several letters, so I use an array to facilitate querying. 
