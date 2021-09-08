@@ -1,51 +1,49 @@
-# 79. Word Search
+# 848. Shifting Letters
 
-Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+You are given a string s of lowercase English letters and an integer array shifts of the same length.
 
-The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+Call the shift() of a letter, the next letter in the alphabet, (wrapping around so that 'z' becomes 'a').
+
+For example, shift('a') = 'b', shift('t') = 'u', and shift('z') = 'a'.
+Now for each shifts[i] = x, we want to shift the first i + 1 letters of s, x times.
+
+Return the final string after all such shifts to s are applied.
 
  
 
 Example 1:
 
-
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
-Output: true
+Input: s = "abc", shifts = [3,5,9]
+Output: "rpl"
+Explanation: We start with "abc".
+After shifting the first 1 letters of s by 3, we have "dbc".
+After shifting the first 2 letters of s by 5, we have "igc".
+After shifting the first 3 letters of s by 9, we have "rpl", the answer.
 Example 2:
 
-
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
-Output: true
-Example 3:
-
-
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
-Output: false
+Input: s = "aaa", shifts = [1,2,3]
+Output: "gfd"
  
 
 Constraints:
 
-m == board.length
-n = board[i].length
-1 <= m, n <= 6
-1 <= word.length <= 15
-board and word consists of only lowercase and uppercase English letters.
- 
-
-Follow up: Could you use search pruning to make your solution faster with a larger board?
+1 <= s.length <= 105
+s consists of lowercase English letters.
+shifts.length == s.length
+0 <= shifts[i] <= 109
 
 # Result:
 
-Runtime: 6466 ms, faster than 52.19% of Python3 online submissions for Word Search.
-Memory Usage: 14.3 MB, less than 42.43% of Python3 online submissions for Word Search.
+Runtime: 792 ms, faster than 65.79% of Python3 online submissions for Shifting Letters.
+Memory Usage: 27.4 MB, less than 55.56% of Python3 online submissions for Shifting Letters.
 
 # Solution:
 
-A BFS problem. We first traverse through the board and determine if an element is the same as the first character of the word so we can begin. Once one of such element is found, the helper function begins to run. During each iteration, it queries the four neighboring slots, and see if the next positions have the desired characters. If in this position the next character is found, then search this position's neighboring positions. The visited positions are marked with "*" to indicate they have been visited. Once the search is over, re-assign the original value to it.
+The code is self-explanatory.
 
 # Complexity analysis
 
-Time complexity: O(n * m * 4 ** w), where n * m is the dimension of the grid and w is the length of the word.
-Space complexity: O(w)
+Time complexity: O(n)
+Space complexity: O(n)
 
-We are traversing through the entire board in the main function. Then, once needed, we execute the helper function which has a complexity of 4 ** w because for each character in the word, it needs to query four neighboring slots.
+One single-pass loop and one array to hold the string chars.
