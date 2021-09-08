@@ -1,40 +1,54 @@
-# 17. Letter Combinations of a Phone Number
+# 39. Combination Sum
 
-Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 
-
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
 
  
 
 Example 1:
 
-Input: digits = "23"
-Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
 Example 2:
 
-Input: digits = ""
-Output: []
+Input: candidates = [2,3,5], target = 8
+Output: [[2,2,2,2],[2,3,3],[3,5]]
 Example 3:
 
-Input: digits = "2"
-Output: ["a","b","c"]
+Input: candidates = [2], target = 1
+Output: []
+Example 4:
+
+Input: candidates = [1], target = 1
+Output: [[1]]
+Example 5:
+
+Input: candidates = [1], target = 2
+Output: [[1,1]]
  
 
 Constraints:
 
-0 <= digits.length <= 4
-digits[i] is a digit in the range ['2', '9'].
+1 <= candidates.length <= 30
+1 <= candidates[i] <= 200
+All elements of candidates are distinct.
+1 <= target <= 500
 
 # Result:
 
-Runtime: 32 ms, faster than 63.78% of Python3 online submissions for Letter Combinations of a Phone Number.
-Memory Usage: 14.2 MB, less than 62.94% of Python3 online submissions for Letter Combinations of a Phone Number.
+Runtime: 72 ms, faster than 75.42% of Python3 online submissions for Combination Sum.
+Memory Usage: 14.1 MB, less than 98.33% of Python3 online submissions for Combination Sum.
 
 # Solution:
 
-Time complexity: O(4 ** n!)
-Space complexity: O(4 ** n!)
+Time complexity: O(n ** n!)
+Space complexity: O(n ** n!)
 
-Another variant of the permutation problem. The only difference is that each number is associated with several letters, so I use an array to facilitate querying. 
+Another variant of the permutation problem. 
