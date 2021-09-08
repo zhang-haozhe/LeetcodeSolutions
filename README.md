@@ -1,44 +1,51 @@
-# 300. Longest Increasing Subsequence
+# 79. Word Search
 
-Given an integer array nums, return the length of the longest strictly increasing subsequence.
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.
 
-A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
 
  
 
 Example 1:
 
-Input: nums = [10,9,2,5,3,7,101,18]
-Output: 4
-Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
 Example 2:
 
-Input: nums = [0,1,0,3,2,3]
-Output: 4
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
 Example 3:
 
-Input: nums = [7,7,7,7,7,7,7]
-Output: 1
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
  
 
 Constraints:
 
-1 <= nums.length <= 2500
--104 <= nums[i] <= 104
+m == board.length
+n = board[i].length
+1 <= m, n <= 6
+1 <= word.length <= 15
+board and word consists of only lowercase and uppercase English letters.
+ 
+
+Follow up: Could you use search pruning to make your solution faster with a larger board?
 
 # Result:
 
-Runtime: 4791 ms, faster than 11.37% of Python3 online submissions for Longest Increasing Subsequence.
-Memory Usage: 14.7 MB, less than 17.90% of Python3 online submissions for Longest Increasing Subsequence.
+Runtime: 6466 ms, faster than 52.19% of Python3 online submissions for Word Search.
+Memory Usage: 14.3 MB, less than 42.43% of Python3 online submissions for Word Search.
 
 # Solution:
 
-See code.
+A BFS problem. We first traverse through the board and determine if an element is the same as the first character of the word so we can begin. Once one of such element is found, the helper function begins to run. During each iteration, it queries the four neighboring slots, and see if the next positions have the desired characters. If in this position the next character is found, then search this position's neighboring positions. The visited positions are marked with "*" to indicate they have been visited. Once the search is over, re-assign the original value to it.
 
 # Complexity analysis
 
-Time complexity: O(n^2)
-Space complexity: O(n)
+Time complexity: O(n * m * 4 ** w), where n * m is the dimension of the grid and w is the length of the word.
+Space complexity: O(w)
 
-Two loops nested, so O(n^2).
-One dp array to hold the answers, so O(n).
+We are traversing through the entire board in the main function. Then, once needed, we execute the helper function which has a complexity of 4 ** w because for each character in the word, it needs to query four neighboring slots.
