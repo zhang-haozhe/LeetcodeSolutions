@@ -1,49 +1,49 @@
-# 848. Shifting Letters
+# 19. Remove Nth Node From End of List
 
-You are given a string s of lowercase English letters and an integer array shifts of the same length.
-
-Call the shift() of a letter, the next letter in the alphabet, (wrapping around so that 'z' becomes 'a').
-
-For example, shift('a') = 'b', shift('t') = 'u', and shift('z') = 'a'.
-Now for each shifts[i] = x, we want to shift the first i + 1 letters of s, x times.
-
-Return the final string after all such shifts to s are applied.
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
  
 
 Example 1:
 
-Input: s = "abc", shifts = [3,5,9]
-Output: "rpl"
-Explanation: We start with "abc".
-After shifting the first 1 letters of s by 3, we have "dbc".
-After shifting the first 2 letters of s by 5, we have "igc".
-After shifting the first 3 letters of s by 9, we have "rpl", the answer.
+
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
 Example 2:
 
-Input: s = "aaa", shifts = [1,2,3]
-Output: "gfd"
+Input: head = [1], n = 1
+Output: []
+Example 3:
+
+Input: head = [1,2], n = 1
+Output: [1]
  
 
 Constraints:
 
-1 <= s.length <= 105
-s consists of lowercase English letters.
-shifts.length == s.length
-0 <= shifts[i] <= 109
+The number of nodes in the list is sz.
+1 <= sz <= 30
+0 <= Node.val <= 100
+1 <= n <= sz
+ 
+
+Follow up: Could you do this in one pass?
 
 # Result:
 
-Runtime: 792 ms, faster than 65.79% of Python3 online submissions for Shifting Letters.
-Memory Usage: 27.4 MB, less than 55.56% of Python3 online submissions for Shifting Letters.
+Runtime: 40 ms, faster than 22.20% of Python3 online submissions for Remove Nth Node From End of List.
+Memory Usage: 14.4 MB, less than 15.57% of Python3 online submissions for Remove Nth Node From End of List.
 
 # Solution:
 
-The code is self-explanatory.
+Abiding the concept of two pointers, we denote a fast and a slow pointer, where the slow pointer is n steps behind the fast one. It is declared only when the fast one has made n moves towards the end. When fast reaches the end, the slow pointer is exactly pointing to the node being removed. Therefore, we just need to point the previous node's next to the slow's next.
+
+Becasue there can be a case that the head node is removed, we need to set up a dummy head. Then, when returning the head, return its next which is the original head.
 
 # Complexity analysis
 
 Time complexity: O(n)
-Space complexity: O(n)
+Space complexity: O(1)
 
-One single-pass loop and one array to hold the string chars.
+Single pass. The first loop and the second loop only stop when fast reaches the end of the linked list.
+Only pointers are created, so the space complexity is O(1).
