@@ -1,40 +1,45 @@
-# 43. Multiply Strings
+# 1189. Maximum Number of Balloons
 
-Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
 
-Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+You can use each character in text at most once. Return the maximum number of instances that can be formed.
 
  
 
 Example 1:
 
-Input: num1 = "2", num2 = "3"
-Output: "6"
+
+
+Input: text = "nlaebolko"
+Output: 1
 Example 2:
 
-Input: num1 = "123", num2 = "456"
-Output: "56088"
+
+
+Input: text = "loonbalxballpoon"
+Output: 2
+Example 3:
+
+Input: text = "leetcode"
+Output: 0
  
 
 Constraints:
 
-1 <= num1.length, num2.length <= 200
-num1 and num2 consist of digits only.
-Both num1 and num2 do not contain any leading zero, except the number 0 itself.
+1 <= text.length <= 104
+text consists of lower case English letters only.
 
 # Result:
 
-Runtime: 168 ms, faster than 24.36% of Python3 online submissions for Multiply Strings.
-Memory Usage: 14.2 MB, less than 56.28% of Python3 online submissions for Multiply Strings.
+Runtime: 32 ms, faster than 78.37% of Python3 online submissions for Maximum Number of Balloons.
+Memory Usage: 14.3 MB, less than 52.86% of Python3 online submissions for Maximum Number of Balloons.
 
 # Solution:
 
-Imagine how you perform multiplication by hand. In multiplication, we multiply each digit from right to left, and thus we reverse the two strings to facilitate iteration. Then, during each multiplication, we multiply the two numbers and then add the carry over. With the result, we can add that to the position in the dp array that reflects the digit of the result. Once one level of iteration is over, add the carry over to the next digit.
-
-Once the calculation is over, we should get an array of number. Use list(map(str, dp)) to convert the int array into a string array and then a string through join.There could be redundant 0s at the beginning of the string, so use lstrip to strip them off from the start.
+Count the frequency of each "balloon letter", then divide the frequencies for l and o by two because they present twice in "balloon". Return the frequency of the least frequent letter.
 
 # Complexity analysis
 
-Time Complexity: O(m*n)
-Space Complexity: O(m + n)
+Time Complexity: O(n)
+Space Complexity: O(n)
 
