@@ -6,7 +6,7 @@ def preorderTraversal(root):
         if now.left:
             temp = now.left
             while temp.right and temp.right != now:
-                temp = temp.now
+                temp = temp.right
             
             if temp.right == now:
                 temp.right = None
@@ -30,7 +30,7 @@ def inorderTraversal(root):
         if now.left:
             temp = now.left
             while temp.right and temp.right != now:
-                temp = temp.now
+                temp = temp.right
             
             if temp.right == now:
                 values.append(now.val)
@@ -54,7 +54,7 @@ def postorderTraversal(root):
         if now.left:
             temp = now.left
             while temp.right and temp.right != now:
-                temp = temp.now
+                temp = temp.right
             
             if temp.right == now:
                 temp.right = None
