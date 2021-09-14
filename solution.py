@@ -1,15 +1,38 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
-    def reverseOnlyLetters(self, s: str) -> str:
-        left = 0
-        right = len(s) - 1
-        chars = list(s)
-        while right > left:
-            while right > -1 and not chars[right].isalpha():
-                right -= 1
-            while left < len(s) and not chars[left].isalpha():
-                left += 1
-            if right > left and right > -1 and left < len(s):
-                chars[right], chars[left] = chars[left], chars[right]
-                right -= 1
-                left += 1
-        return ''.join(chars)
+    def mergeTwoLists(self, l1, l2):
+        # maintain an unchanging reference to node ahead of the return node.
+        prehead = ListNode(-1)
+
+        prev = prehead
+        while l1 and l2:
+            if l1.val <= l2.val:
+                prev.next = l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next            
+            prev = prev.next
+
+        # exactly one of l1 and l2 can be non-null at this point, so connect
+        # the non-null list to the end of the merged list.
+        prev.next = l1 if l1 is not None else l2
+
+        return prehead.next
+    
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        if len(lists) == 1:
+            return lists[0]
+        if len(lists) == 0:
+            return None
+        
+        head = lists[0]
+        
+        for i in range(1, len(lists)):
+            head = self.mergeTwoLists(head, lists[i])
+        
+        return head

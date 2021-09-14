@@ -1,44 +1,54 @@
-# 917. Reverse Only Letters
+# 23. Merge k Sorted Lists
 
-Given a string s, reverse the string according to the following rules:
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
 
-All the characters that are not English letters remain in the same position.
-All the English letters (lowercase or uppercase) should be reversed.
-Return s after reversing it.
+Merge all the linked-lists into one sorted linked-list and return it.
 
  
 
 Example 1:
 
-Input: s = "ab-cd"
-Output: "dc-ba"
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+merging them into one sorted list:
+1->1->2->3->4->4->5->6
 Example 2:
 
-Input: s = "a-bC-dEf-ghIj"
-Output: "j-Ih-gfE-dCba"
+Input: lists = []
+Output: []
 Example 3:
 
-Input: s = "Test1ng-Leet=code-Q!"
-Output: "Qedo1ct-eeLg=ntse-T!"
+Input: lists = [[]]
+Output: []
  
 
 Constraints:
 
-1 <= s.length <= 100
-s consists of characters with ASCII values in the range [33, 122].
-s does not contain '\"' or '\\'.
+k == lists.length
+0 <= k <= 10^4
+0 <= lists[i].length <= 500
+-10^4 <= lists[i][j] <= 10^4
+lists[i] is sorted in ascending order.
+The sum of lists[i].length won't exceed 10^4.
 
 # Result:
 
-Runtime: 52 ms, faster than 5.97% of Python3 online submissions for Reverse Only Letters.
-Memory Usage: 14.1 MB, less than 91.66% of Python3 online submissions for Reverse Only Letters.
+Runtime: 5883 ms, faster than 5.00% of Python3 online submissions for Merge k Sorted Lists.
+Memory Usage: 17.1 MB, less than 99.58% of Python3 online submissions for Merge k Sorted Lists.
 
 # Solution:
 
-Two pointers. Iterate until one pointer reaches a letter and then iterate the other one. This should make both on letters. Then, swap them and then move both of them one step closer. Note that this should only run when the right pointer is to the right of the left. 
+This solution reduces merging k lists to merging 2 lists (k - 1) times. Each time, we merge the first list with the forthcoming list and then return its head in the end. 
 
 # Complexity analysis
 
-Time Complexity: O(n)
-Space Complexity: O(n)
+Time Complexity: O(kn)
+Space Complexity: O(1)
 
+Merging two list takes O(m + n) time, where m and n are the two lists' length. In this case, we can assume that the length of the first list is constant, and then there are k lists, so it takes O(kn) time in total.
