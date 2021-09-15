@@ -24,12 +24,12 @@ The number of nodes in the list is in the range [0, 5 * 104].
 
 # Result:
 
-Runtime: 176 ms, faster than 91.51% of Python3 online submissions for Sort List.
-Memory Usage: 30.3 MB, less than 44.00% of Python3 online submissions for Sort List.
+Runtime: 1064 ms, faster than 5.04% of Python3 online submissions for Sort List.
+Memory Usage: 33.7 MB, less than 26.07% of Python3 online submissions for Sort List.
 
 # Solution:
 
 Time complexity: O(nlogn)
-Space complexity: O(n)
+Space complexity: O(1)
 
-This is not the most ideal solution because it does not use O(1) space. The way I approach it is to first traverse through the linked list, and then save and sort each node in a list. A linked list is later created from the list and then returned. Since all nodes are saved in a list, the space complexity is O(n), and since the sorting algorithm is the built-in quick sort, the time complexity is O(nlogn).
+This solution solves the problem by the concept of merge sort. Each time, we reduce the list into sublists by seperating it in the middle, until the lists are of length 1 or 2. If the sublist consists of 1 node only, then return it. If the sublist consists of 2, then sort it by comparing the two values and then return it. Therefore, the returned lists become sorted lists. At this moment, we only need to convert the problem to merge two sorted lists multiple times.
