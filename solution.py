@@ -1,38 +1,31 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
-    def mergeTwoLists(self, l1, l2):
-        # maintain an unchanging reference to node ahead of the return node.
-        prehead = ListNode(-1)
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        testBoard = {}
 
-        prev = prehead
-        while l1 and l2:
-            if l1.val <= l2.val:
-                prev.next = l1
-                l1 = l1.next
-            else:
-                prev.next = l2
-                l2 = l2.next            
-            prev = prev.next
-
-        # exactly one of l1 and l2 can be non-null at this point, so connect
-        # the non-null list to the end of the merged list.
-        prev.next = l1 if l1 is not None else l2
-
-        return prehead.next
-    
-    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-        if len(lists) == 1:
-            return lists[0]
-        if len(lists) == 0:
-            return None
+        for x in range(9):
+            for y in range(9):
+                if board[x][y] != '.':
+                    if board[x][y] in testBoard:
+                        return False
+                        testBoard[board[x][y]] = 1
+            testBoard = {}
         
-        head = lists[0]
         
-        for i in range(1, len(lists)):
-            head = self.mergeTwoLists(head, lists[i])
+        for x in range(9):
+            for y in range(9):
+                if board[y][x] != '.':
+                    if board[y][x] in testBoard:
+                        return False
+                    testBoard[board[y][x]] = 1
+            testBoard = {}
         
-        return head
+        for x in range(0, 9, 3):
+            for y in range(0, 9, 3):
+                for _x in range(x, x + 3):
+                    for _y in range(y, y + 3):
+                        if board[_y][_x] != '.':
+                            if board[_y][_x] in testBoard:
+                                return False
+                            testBoard[board[_y][_x]] = 1
+                testBoard = {}
+        return True
