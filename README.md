@@ -1,52 +1,50 @@
-# 852. Peak Index in a Mountain Array
+# 33. Search in Rotated Sorted Array
 
-Let's call an array arr a mountain if the following properties hold:
+There is an integer array nums sorted in ascending order (with distinct values).
 
-arr.length >= 3
-There exists some i with 0 < i < arr.length - 1 such that:
-arr[0] < arr[1] < ... arr[i-1] < arr[i]
-arr[i] > arr[i+1] > ... > arr[arr.length - 1]
-Given an integer array arr that is guaranteed to be a mountain, return any i such that arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
+Prior to being passed to your function, nums is rotated at an unknown pivot index k (0 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+
+Given the array nums after the rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+ 
 
 Example 1:
 
-Input: arr = [0,1,0]
-Output: 1
+Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
 Example 2:
 
-Input: arr = [0,2,1,0]
-Output: 1
+Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
 Example 3:
 
-Input: arr = [0,10,5,2]
-Output: 1
-Example 4:
-
-Input: arr = [3,4,5,1]
-Output: 2
-Example 5:
-
-Input: arr = [24,69,100,99,79,78,67,36,26,19]
-Output: 2
+Input: nums = [1], target = 0
+Output: -1
+ 
 
 Constraints:
 
-3 <= arr.length <= 104
-0 <= arr[i] <= 106
-arr is guaranteed to be a mountain array.
-
-Follow up: Finding the O(n) is straightforward, could you find an O(log(n)) solution?
+1 <= nums.length <= 5000
+-104 <= nums[i] <= 104
+All values of nums are unique.
+nums is guaranteed to be rotated at some pivot.
+-104 <= target <= 104
 
 # Result:
 
-Runtime: 72 ms, faster than 81.30% of Python3 online submissions for Peak Index in a Mountain Array.
-Memory Usage: 15.3 MB, less than 57.05% of Python3 online submissions for Peak Index in a Mountain Array.
+Runtime: 36 ms, faster than 92.58% of Python3 online submissions for Search in Rotated Sorted Array.
+Memory Usage: 14.8 MB, less than 22.36% of Python3 online submissions for Search in Rotated Sorted Array.
 
 # Solution:
 
 Time complexity: O(log(n))
 Space complexity: O(1)
 
-The way to resolve the problem is to use binary search. During the search, if the current value is larger than the previous value, then we reset the left boundary to the current position to ensure that it starts searching right here. Doing so ensures that the list is incrementing as it moves right too. If the list is not incrementing at the current position, then it sets the right boundary here. Once the two boundaries overlap, return the index of the bigger value of them.
+Here is the roadmap to solve the problem:
+
+1. Find out the smallest element in the array. In a shifted sorted array, the smallest element is the pivot that the two subarrays are put together.
+2. Conduct binary search within the two subarrays given the position of the pivot, respectively.
 
 Since we only traverse through the list using binary search, the time complexity is O(log(n)). We do not create any extra data structure, so the space complexity is O(1).
