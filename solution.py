@@ -1,42 +1,23 @@
-from copy import deepcopy
-
-# Solution 1
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        return self.recursion(nums)
-    
-    def recursion(self, nums):
-        if len(nums) == 2:
-            return [nums, nums[::-1]]
-        elif len(nums) < 2:
-            return [nums]
-        else:
-            subArrays = self.recursion(nums[1:])
-            head = nums[0]
-            
-            perm = list()
-            for i in range(len(subArrays)):
-                for j in range(len(subArrays[0]) + 1):
-                    temp = deepcopy(subArrays[i]) 
-                    temp.insert(j, head)
-                    perm.append(temp)
-            
-            return perm
-
-# Solution 2
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        # write your code here
-        perms = []
-        self.helper(nums, perms)
-        return perms
-    
-    def helper(self, nums, perms, perm=[]):
-        if not nums:
-            perms.append(list(perm))
-            return
+    def helper(self, root):
+        if not root:
+            return [0, -float('inf')]
         
-        for i in range(len(nums)):
-            perm.append(nums[i])
-            self.helper(nums[:i] + nums[i + 1:], perms, perm)
-            perm.pop()
+        rightRes = self.helper(root.right)
+        leftRes = self.helper(root.left)
+        
+        maxSingle = max(rightRes[0], leftRes[0], 0) 
+        maxTotal = max(rightRes[0] + leftRes[0] + root.val, leftRes[0] + root.val, \
+                       rightRes[0] + root.val, rightRes[1], leftRes[1], root.val)
+        
+        return [maxSingle + root.val, maxTotal]
+        
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        return self.helper(root)[1]
+    
