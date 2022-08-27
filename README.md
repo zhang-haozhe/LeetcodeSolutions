@@ -1,33 +1,10 @@
-# 124. Binary Tree Maximum Path Sum
+# Problem
 
-A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
+Write a function that takes a big message and splits it into minimum number of smaller messages adhering to given limit. While splitting the function should not split a word into two messages. In the output messages please add tag ( x/y ). The total length (including the tag) should not exceed 160.
 
-The path sum of a path is the sum of the node's values in the path.
+## Each chunk:
 
-Given the root of a binary tree, return the maximum path sum of any non-empty path.
-
-Example 1:
-
-Input: root = [1,2,3]
-Output: 6
-Explanation: The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.
-Example 2:
-
-Input: root = [-10,9,20,null,null,15,7]
-Output: 42
-Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
-
-Constraints:
-
-The number of nodes in the tree is in the range [1, 3 * 104].
--1000 <= Node.val <= 1000.
-
-# Result:
-
-Runtime: 96 ms, faster than 45.14% of Python3 online submissions for Binary Tree Maximum Path Sum.
-Memory Usage: 21.1 MB, less than 84.45% of Python3 online submissions for Binary Tree Maximum Path Sum.
-
-# Solution:
-
-Time complexity: O(n)
-Space complexity: O(n)
+up to 160 characters long
+no word should be split in the middle
+each chunk has to have its order suffixed in the form of ' (k/n)', e.g. "this is the first chunk (1/2)", "this is the second chunk (2/2)"
+if the text provided to the function is less than 160 characters, no ordering should be suffixed
