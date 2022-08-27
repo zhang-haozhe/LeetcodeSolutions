@@ -19,6 +19,3 @@ class Solution:
             nums[k], nums[i] = nums[i], nums[k]
         # reverse [j, end)
         nums[j:] = nums[j:][::-1]
-        
-s = Solution()
-s.nextPermutation([3,2,1])
