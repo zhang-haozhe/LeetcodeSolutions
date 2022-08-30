@@ -1,36 +1,26 @@
 class Solution:
-    dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        trie = {}
-        for word in words:
-            curr = trie
-            for char in word:
-                if char not in curr:
-                    curr[char] = {}
-                curr = curr[char]
-            else:
-                curr['*'] = word
-                
-        output = []
-        
-        def backtrack(i, j, trie, output):
-            char = board[i][j]
-            curr = trie[char]
-            if '*' in curr:
-                output.append(curr['*'])
-                curr.pop('*')
-            board[i][j] = '#'
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        max_dek = collections.deque()
+        min_dek = collections.deque()
+
+        length = 0
+        left = 0
+        for i in range(len(nums)):
+            while max_dek and nums[max_dek[-1]] < nums[i]:
+                max_dek.pop()
+            while min_dek and nums[min_dek[-1]] > nums[i]:
+                min_dek.pop()
+            max_dek.append(i)
+            min_dek.append(i)
             
-            for _i, _j in self.dirs:
-                n_i, n_j = i + _i, j + _j
-                if 0 <= n_i < len(board) and 0 <= n_j < len(board[0]) and board[n_i][n_j] in curr:
-                    backtrack(n_i, n_j, curr, output)
-            if not curr:
-                trie.pop(char)
-            board[i][j] = char
-        
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if board[i][j] in trie:
-                    backtrack(i, j, trie, output)
-        return output
+            res = nums[max_dek[0]] - nums[min_dek[0]]
+            while res > limit:
+                left += 1
+                while max_dek and left > max_dek[0]:
+                    max_dek.popleft()
+                while min_dek and left > min_dek[0]:
+                    min_dek.popleft()
+                res = nums[max_dek[0]] - nums[min_dek[0]]
+            
+            length = max(length, i - left + 1)
+        return length

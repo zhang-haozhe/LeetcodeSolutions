@@ -1,44 +1,58 @@
 # 212. Word Search II
 
-Given an m x n board of characters and a list of strings words, return all words on the board.
-
-Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+Given an array of integers nums and an integer limit, return the size of the longest non-empty subarray such that the absolute difference between any two elements of this subarray is less than or equal to limit.
 
  
 
 Example 1:
 
-
-Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
-Output: ["eat","oath"]
+Input: nums = [8,2,4,7], limit = 4
+Output: 2 
+Explanation: All subarrays are: 
+[8] with maximum absolute diff |8-8| = 0 <= 4.
+[8,2] with maximum absolute diff |8-2| = 6 > 4. 
+[8,2,4] with maximum absolute diff |8-2| = 6 > 4.
+[8,2,4,7] with maximum absolute diff |8-2| = 6 > 4.
+[2] with maximum absolute diff |2-2| = 0 <= 4.
+[2,4] with maximum absolute diff |2-4| = 2 <= 4.
+[2,4,7] with maximum absolute diff |2-7| = 5 > 4.
+[4] with maximum absolute diff |4-4| = 0 <= 4.
+[4,7] with maximum absolute diff |4-7| = 3 <= 4.
+[7] with maximum absolute diff |7-7| = 0 <= 4. 
+Therefore, the size of the longest subarray is 2.
 Example 2:
 
+Input: nums = [10,1,2,4,7,2], limit = 5
+Output: 4 
+Explanation: The subarray [2,4,7,2] is the longest since the maximum absolute diff is |2-7| = 5 <= 5.
+Example 3:
 
-Input: board = [["a","b"],["c","d"]], words = ["abcb"]
-Output: []
+Input: nums = [4,2,2,2,4,4,2,2], limit = 0
+Output: 3
  
 
 Constraints:
 
-m == board.length
-n == board[i].length
-1 <= m, n <= 12
-board[i][j] is a lowercase English letter.
-1 <= words.length <= 3 * 104
-1 <= words[i].length <= 10
-words[i] consists of lowercase English letters.
-All the strings of words are unique.
+1 <= nums.length <= 105
+1 <= nums[i] <= 109
+0 <= limit <= 109
 
 # Result:
 
-Runtime: 1788 ms, faster than 62.50% of Python3 online submissions for Word Search II.
-Memory Usage: 15.6 MB, less than 73.02% of Python3 online submissions for Word Search II.
+Runtime: 1127 ms, faster than 47.12% of Python3 online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+Memory Usage: 24 MB, less than 32.04% of Python3 online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
 
 # Solution:
 
-DFS + trie. The key here is to use a trie to check if an iterated word is in the words list. If the current word is part of a word in the list, then keep going until it finds the whole word, and delete the '\*' element in the trie to indicate the word has been found and no need to append it to the output list again. One way to optimize the performance of the algo is to delete the current iterator of the trie if it is empty. This can occur when a word has been found and '\*' is removed, which results in an emtpy trie. 
+Solved using two deques. This problem is very similar to sliding window maximum, but the difference is that we want to keep track of the sum in order to make it always less than or equal to the limit. Therefore, we use a deque that stores the indices of monotonically incrementing values and one that stores those of monotonically decrementing values. Hence, we can easily retrieve the maximum and the minimum in the sliding window.
+
+Then, if the difference between the two values goes beyond the limit, we move the left bound right and pop the indices that are smaller than the left bound. The remaining values reflect the values that are still in the window. Repeat the last step, until the sum is less than or equal to the limit.
 
 # Complexity analysis
 
-Time complexity: O(M(4 * 3<sup>L-1</sup>)), where M is the number of cells in the board and L is the maximum length of words.
-Space Complexity: O(N), where N is the total number of letters in the dictionary.
+Time complexity: O(N), where N is the number of numbers.
+Space Complexity: O(N), where N is the total number of numbers. 
+
+It is easy to understand that it totally takes N time to process N numbers, since in each iteration we only involve appending and popping jobs, which both take O(1) time. In total, we do all of them in O(n) time.
+
+For space, it is O(N) again because the worst case scenario is that the limit is super great, so the two deques have to accomodate all numbers in the list. 
