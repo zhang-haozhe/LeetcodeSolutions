@@ -1,51 +1,44 @@
-# 79. Word Search
+# 212. Word Search II
 
-Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+Given an m x n board of characters and a list of strings words, return all words on the board.
 
-The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
 
  
 
 Example 1:
 
 
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
-Output: true
+Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+Output: ["eat","oath"]
 Example 2:
 
 
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
-Output: true
-Example 3:
-
-
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
-Output: false
+Input: board = [["a","b"],["c","d"]], words = ["abcb"]
+Output: []
  
 
 Constraints:
 
 m == board.length
-n = board[i].length
-1 <= m, n <= 6
-1 <= word.length <= 15
-board and word consists of only lowercase and uppercase English letters.
- 
-
-Follow up: Could you use search pruning to make your solution faster with a larger board?
+n == board[i].length
+1 <= m, n <= 12
+board[i][j] is a lowercase English letter.
+1 <= words.length <= 3 * 104
+1 <= words[i].length <= 10
+words[i] consists of lowercase English letters.
+All the strings of words are unique.
 
 # Result:
 
-Runtime: 6466 ms, faster than 52.19% of Python3 online submissions for Word Search.
-Memory Usage: 14.3 MB, less than 42.43% of Python3 online submissions for Word Search.
+Runtime: 1788 ms, faster than 62.50% of Python3 online submissions for Word Search II.
+Memory Usage: 15.6 MB, less than 73.02% of Python3 online submissions for Word Search II.
 
 # Solution:
 
-A BFS problem. We first traverse through the board and determine if an element is the same as the first character of the word so we can begin. Once one of such element is found, the helper function begins to run. During each iteration, it queries the four neighboring slots, and see if the next positions have the desired characters. If in this position the next character is found, then search this position's neighboring positions. The visited positions are marked with "*" to indicate they have been visited. Once the search is over, re-assign the original value to it.
+DFS + trie. The key here is to use a trie to check if an iterated word is in the words list. If the current word is part of a word in the list, then keep going until it finds the whole word, and delete the '\*' element in the trie to indicate the word has been found and no need to append it to the output list again. One way to optimize the performance of the algo is to delete the current iterator of the trie if it is empty. This can occur when a word has been found and '\*' is removed, which results in an emtpy trie. 
 
 # Complexity analysis
 
-Time complexity: O(n * m * 4 ** w), where n * m is the dimension of the grid and w is the length of the word.
-Space complexity: O(w)
-
-We are traversing through the entire board in the main function. Then, once needed, we execute the helper function which has a complexity of 4 ** w because for each character in the word, it needs to query four neighboring slots.
+Time complexity: O(M(4 * 3<sup>L-1</sup>)), where M is the number of cells in the board and L is the maximum length of words.
+Space Complexity: O(N), where N is the total number of letters in the dictionary.
