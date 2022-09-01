@@ -1,54 +1,44 @@
-# 1041. Robot Bounded In Circle
+# 207. Course Schedule
 
-On an infinite plane, a robot initially stands at (0, 0) and faces north. The robot can receive one of three instructions:
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
 
-"G": go straight 1 unit;
-"L": turn 90 degrees to the left;
-"R": turn 90 degrees to the right.
-The robot performs the instructions given in order, and repeats them forever.
-
-Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.
+For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+Return true if you can finish all courses. Otherwise, return false.
 
  
 
 Example 1:
 
-Input: instructions = "GGLLGG"
+Input: numCourses = 2, prerequisites = [[1,0]]
 Output: true
-Explanation: The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).
-When repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0. So it is possible.
 Example 2:
 
-Input: instructions = "GG"
+Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
 Output: false
-Explanation: The robot moves north indefinitely.
-Example 3:
-
-Input: instructions = "GL"
-Output: true
-Explanation: The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> ...
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
  
 
 Constraints:
 
-1 <= instructions.length <= 100
-instructions[i] is 'G', 'L' or, 'R'.
+1 <= numCourses <= 2000
+0 <= prerequisites.length <= 5000
+prerequisites[i].length == 2
+0 <= ai, bi < numCourses
+All the pairs prerequisites[i] are unique.
 
 # Result:
 
-Runtime: 24 ms, faster than 96.40% of Python3 online submissions for Robot Bounded In Circle.
-Memory Usage: 14.1 MB, less than 92.17% of Python3 online submissions for Robot Bounded In Circle.
+Runtime: 134 ms, faster than 69.54% of Python3 online submissions for Course Schedule.
+Memory Usage: 15.4 MB, less than 90.00% of Python3 online submissions for Course Schedule.
 
 # Solution:
 
-We store the directions in an array. Each time, if it goes, then the position moves per the direction given. If it turns, the index for the direction increases by 1. If it turns right, we only need to make the index point to the opposite direction given the result of turning left. 
-
-Because of the nature of the 4 directions given in this game, at most it takes 4 cycles for the robot to return to the initial position. Otherwise, it won't. So, we only need to run the loop 4 times to check if at the end of each iteration the robot returns to the initial position. 
+Use Topological Sort to solve the problem. First, count the number of dependencies of each node, and put all nodes that have no dependencies to the queue. Each time, we pop one, remove it from the graph, and thus decrease the number of dependencies of its next nodes by one. Once its neighbor nodes have an incoming degree of 0, we add it to the queue. If the queue gets empty, check if the number of popped nodes is equal to the total number of nodes. If not, it indicates there is a cycle in the graph and the program should return false. Otherwise, return true.
 
 # Complexity analysis
 
-Time Complexity: O(n)
-Space Complexity: O(1)
-
-The loop is iterated 4 * len(instructions) times, so the time complexity is O(n).
-No extra space is used, so O(1) for the space complexity.
+Time Complexity: O(|E| + |V|)
+Space Complexity: O(|E| + |V|)

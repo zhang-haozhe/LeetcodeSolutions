@@ -1,21 +1,26 @@
 class Solution:
-    def isRobotBounded(self, instructions: str) -> bool:
-        idx = 0
-        dirs = [[1, 0], [0, -1], [-1, 0], [0, 1]]
-        # north, west, south, east
-        pos = [0, 0]
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # topological sort
         
-        for j in range(4):
-            for char in instructions:
-                if char == 'G':
-                    for i in range(2):
-                        pos[i] += dirs[idx][i]
-                else:
-                    idx = (idx + 1) % 4
-                    if char == 'R':
-                        idx = (idx + 2) % 4
-            if pos == [0, 0]:
-                return True
+        courses = [0] * numCourses
+        c_map = collections.defaultdict(set)
+        q = collections.deque()
         
-        return False
-            
+        for c, r in prerequisites:
+            courses[c] += 1
+            c_map[r].add(c)
+        
+        for i, val in enumerate(courses):
+            if val == 0:
+                q.append(i)
+        
+        output = []
+        while q and courses[q[0]] == 0:
+            c = q.popleft()
+            output.append(c)
+            for next_c in c_map[c]:
+                courses[next_c] -= 1
+                if courses[next_c] == 0:
+                    q.append(next_c)
+        
+        return len(output) == numCourses
