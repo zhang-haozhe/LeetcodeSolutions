@@ -1,44 +1,34 @@
-# 207. Course Schedule
+# 378. Kth Smallest Element in a Sorted Matrix
 
-There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
 
-For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
-Return true if you can finish all courses. Otherwise, return false.
+Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+
+You must find a solution with a memory complexity better than O(n2).
 
  
 
 Example 1:
-
-Input: numCourses = 2, prerequisites = [[1,0]]
-Output: true
-Explanation: There are a total of 2 courses to take. 
-To take course 1 you should have finished course 0. So it is possible.
+378. Kth Smallest Element in a Sorted Matrix
+Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
+Output: 13
+Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
 Example 2:
 
-Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
-Output: false
-Explanation: There are a total of 2 courses to take. 
-To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+Input: matrix = [[-5]], k = 1
+Output: -5
  
 
 Constraints:
 
-1 <= numCourses <= 2000
-0 <= prerequisites.length <= 5000
-prerequisites[i].length == 2
-0 <= ai, bi < numCourses
-All the pairs prerequisites[i] are unique.
+n == matrix.length == matrix[i].length
+1 <= n <= 300
+-109 <= matrix[i][j] <= 109
+All the rows and columns of matrix are guaranteed to be sorted in non-decreasing order.
+1 <= k <= n2
+ 
 
-# Result:
+Follow up:
 
-Runtime: 134 ms, faster than 69.54% of Python3 online submissions for Course Schedule.
-Memory Usage: 15.4 MB, less than 90.00% of Python3 online submissions for Course Schedule.
-
-# Solution:
-
-Use Topological Sort to solve the problem. First, count the number of dependencies of each node, and put all nodes that have no dependencies to the queue. Each time, we pop one, remove it from the graph, and thus decrease the number of dependencies of its next nodes by one. Once its neighbor nodes have an incoming degree of 0, we add it to the queue. If the queue gets empty, check if the number of popped nodes is equal to the total number of nodes. If not, it indicates there is a cycle in the graph and the program should return false. Otherwise, return true.
-
-# Complexity analysis
-
-Time Complexity: O(|E| + |V|)
-Space Complexity: O(|E| + |V|)
+Could you solve the problem with a constant memory (i.e., O(1) memory complexity)?
+Could you solve the problem in O(n) time complexity? The solution may be too advanced for an interview but you may find reading this paper fun.
