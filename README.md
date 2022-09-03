@@ -1,34 +1,48 @@
-# 378. Kth Smallest Element in a Sorted Matrix
+# 855. Exam Room
 
-Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
+There is an exam room with n seats in a single row labeled from 0 to n - 1.
 
-Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+When a student enters the room, they must sit in the seat that maximizes the distance to the closest person. If there are multiple such seats, they sit in the seat with the lowest number. If no one is in the room, then the student sits at seat number 0.
 
-You must find a solution with a memory complexity better than O(n2).
+Design a class that simulates the mentioned exam room.
 
+Implement the ExamRoom class:
+
+ExamRoom(int n) Initializes the object of the exam room with the number of the seats n.
+int seat() Returns the label of the seat at which the next student will set.
+void leave(int p) Indicates that the student sitting at seat p will leave the room. It is guaranteed that there will be a student sitting at seat p.
  
 
 Example 1:
-378. Kth Smallest Element in a Sorted Matrix
-Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
-Output: 13
-Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
-Example 2:
 
-Input: matrix = [[-5]], k = 1
-Output: -5
+Input
+["ExamRoom", "seat", "seat", "seat", "seat", "leave", "seat"]
+[[10], [], [], [], [], [4], []]
+Output
+[null, 0, 9, 4, 2, null, 5]
+
+Explanation
+ExamRoom examRoom = new ExamRoom(10);
+examRoom.seat(); // return 0, no one is in the room, then the student sits at seat number 0.
+examRoom.seat(); // return 9, the student sits at the last seat number 9.
+examRoom.seat(); // return 4, the student sits at the last seat number 4.
+examRoom.seat(); // return 2, the student sits at the last seat number 2.
+examRoom.leave(4);
+examRoom.seat(); // return 5, the student sits at the last seat number 5.
+
  
 
 Constraints:
 
-n == matrix.length == matrix[i].length
-1 <= n <= 300
--109 <= matrix[i][j] <= 109
-All the rows and columns of matrix are guaranteed to be sorted in non-decreasing order.
-1 <= k <= n2
- 
+1 <= n <= 109
+It is guaranteed that there is a student sitting at seat p.
+At most 104 calls will be made to seat and leave.
 
-Follow up:
+# result:
 
-Could you solve the problem with a constant memory (i.e., O(1) memory complexity)?
-Could you solve the problem in O(n) time complexity? The solution may be too advanced for an interview but you may find reading this paper fun.
+Runtime: 100 ms, faster than 97.07% of Python3 online submissions for Exam Room.
+Memory Usage: 18 MB, less than 39.84% of Python3 online submissions for Exam Room.
+
+# Solution:
+
+General idea is to insert intervals like (distance, start, end) to the heap and always pick the top interval from heap to get the biggest distance for seating.
